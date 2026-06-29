@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Browse Courses",
+    "href": "/courses",
+    "icon": "Compass",
+    "color": "text-blue-600 dark:text-blue-400",
+    "bg": "bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40"
+  },
+  {
+    "name": "Join Live Class",
+    "href": "/dashboard/live",
+    "icon": "Video",
+    "color": "text-purple-600 dark:text-purple-400",
+    "bg": "bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/40"
+  },
+  {
+    "name": "Study Materials",
+    "href": "/dashboard/materials",
+    "icon": "FolderOpen",
+    "color": "text-yellow-600 dark:text-yellow-400",
+    "bg": "bg-yellow-50 dark:bg-yellow-900/20 hover:bg-yellow-100 dark:hover:bg-yellow-900/40"
+  },
+  {
+    "name": "Take Assessment",
+    "href": "/dashboard/assessments",
+    "icon": "CheckSquare",
+    "color": "text-green-600 dark:text-green-400",
+    "bg": "bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/40"
+  },
+  {
+    "name": "View Results",
+    "href": "/dashboard/results",
+    "icon": "BarChart2",
+    "color": "text-indigo-600 dark:text-indigo-400",
+    "bg": "bg-indigo-50 dark:bg-indigo-900/20 hover:bg-indigo-100 dark:hover:bg-indigo-900/40"
+  },
+  {
+    "name": "My Certificates",
+    "href": "/dashboard/certificates",
+    "icon": "Award",
+    "color": "text-red-500 dark:text-red-400",
+    "bg": "bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "header": {
+    "badge": "TRUSTED BY",
+    "titlePart1": "Learners. Industry Professionals.",
+    "titleHighlight": "Institutions.",
+    "description": "AI Abhyas is the preferred AI training platform for students, professionals, and leading organizations worldwide."
+  },
+  "cards": [
+    {
+      "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
+      "icon": "GraduationCap",
+      "titlePrefix": "Trusted by ",
+      "titleHighlight": "Learners",
+      "description": "From beginners to advanced learners, thousands are building their AI future with us.",
+      "stats": [
+        { "icon": "Users", "value": "25K+", "label": "Active Learners" },
+        { "icon": "BookOpen", "value": "120+", "label": "Courses Enrolled" },
+        { "icon": "Star", "value": "4.8/5", "label": "Average Rating" }
+      ]
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
+      "icon": "Briefcase",
+      "titlePrefix": "Trusted by ",
+      "titleHighlight": "Industry Professionals",
+      "description": "Professionals upskill with practical AI training designed for real-world impact.",
+      "stats": [
+        { "icon": "Users", "value": "10K+", "label": "Professionals" },
+        { "icon": "Building2", "value": "500+", "label": "Companies Upskilled" },
+        { "icon": "TrendingUp", "value": "90%", "label": "Career Impact" }
+      ]
+    },
+    {
+      "image": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop",
+      "icon": "Landmark",
+      "titlePrefix": "Trusted by ",
+      "titleHighlight": "Institutions",
+      "description": "Educational institutions and organizations partner with us to empower their communities.",
+      "stats": [
+        { "icon": "ShieldCheck", "value": "150+", "label": "Partner Institutions" },
+        { "icon": "Users", "value": "50K+", "label": "Students Trained" },
+        { "icon": "Globe2", "value": "15+", "label": "Countries" }
+      ]
+    }
+  ],
+  "logos": [
+    { "name": "Google", "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+    { "name": "Microsoft", "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
+    { "name": "AWS", "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
+    { "name": "IBM", "url": "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+    { "name": "NVIDIA", "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg" },
+    { "name": "Meta", "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
+    { "name": "Netflix", "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" },
+    { "name": "Oracle", "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" }
+  ]
+}

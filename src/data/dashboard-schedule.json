@@ -1,0 +1,35 @@
+[
+  {
+    "time": "10:00 AM",
+    "type": "Live Class",
+    "typeColor": "text-red-500",
+    "title": "Advanced Prompt Engineering",
+    "subtitle": "by Rahul Verma",
+    "action": "Join Now",
+    "actionStyle": "bg-primary hover:bg-primary/90 text-white",
+    "dotColor": "border-primary",
+    "icon": "Video"
+  },
+  {
+    "time": "02:30 PM",
+    "type": "Assignment Due",
+    "typeColor": "text-orange-500",
+    "title": "Build Your First AI Application",
+    "subtitle": "",
+    "action": "",
+    "actionStyle": "",
+    "dotColor": "border-muted-foreground",
+    "icon": "FileText"
+  },
+  {
+    "time": "05:00 PM",
+    "type": "Mentor Session",
+    "typeColor": "text-blue-500",
+    "title": "1:1 Doubt Clearing with Mentor",
+    "subtitle": "",
+    "action": "",
+    "actionStyle": "",
+    "dotColor": "border-blue-500",
+    "icon": "MessageCircle"
+  }
+]

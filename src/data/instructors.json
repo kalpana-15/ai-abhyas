@@ -1,0 +1,57 @@
+[
+  {
+    "id": "i1",
+    "name": "Dr. Alan Turing",
+    "role": "Lead AI Scientist",
+    "expertise": "Machine Learning, Neural Networks",
+    "experience": "15+ Years",
+    "coursesTaught": 12,
+    "rating": 4.9,
+    "avatar": "/Assets/images/tutor/pexels-bymuratisikofficial-34762358.jpg",
+    "linkedin": "#"
+  },
+  {
+    "id": "i2",
+    "name": "Sarah Connor",
+    "role": "Senior Robotics Engineer",
+    "expertise": "Computer Vision, PyTorch",
+    "experience": "10+ Years",
+    "coursesTaught": 8,
+    "rating": 4.8,
+    "avatar": "/Assets/images/tutor/pexels-helenalopes-27086922.jpg",
+    "linkedin": "#"
+  },
+  {
+    "id": "i3",
+    "name": "David Bowman",
+    "role": "Prompt Engineering Lead",
+    "expertise": "LLMs, Generative AI",
+    "experience": "7+ Years",
+    "coursesTaught": 15,
+    "rating": 4.9,
+    "avatar": "/Assets/images/tutor/pexels-karola-g-6256118.jpg",
+    "linkedin": "#"
+  },
+  {
+    "id": "i4",
+    "name": "Elena Martinez",
+    "role": "Data Strategy Director",
+    "expertise": "AI Ethics, Business Strategy",
+    "experience": "12+ Years",
+    "coursesTaught": 5,
+    "rating": 4.7,
+    "avatar": "/Assets/images/tutor/pexels-katerina-holmes-5905753.jpg",
+    "linkedin": "#"
+  },
+  {
+    "id": "i5",
+    "name": "Dr. Emily Chen",
+    "role": "NLP Specialist",
+    "expertise": "Natural Language Processing, Transformers",
+    "experience": "8+ Years",
+    "coursesTaught": 9,
+    "rating": 4.8,
+    "avatar": "/Assets/images/tutor/pexels-n-voitkevich-8062305.jpg",
+    "linkedin": "#"
+  }
+]

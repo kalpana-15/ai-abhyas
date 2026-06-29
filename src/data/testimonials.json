@@ -1,0 +1,44 @@
+[
+  {
+    "id": "t1",
+    "name": "Sarah Chen",
+    "role": "Product Manager at TechFlow",
+    "content": "AI Abhyas transformed how our team approaches problem-solving. The curriculum is perfectly balanced between theory and practical application.",
+    "avatar": "https://i.pravatar.cc/150?u=sarah"
+  },
+  {
+    "id": "t2",
+    "name": "James Wilson",
+    "role": "Senior Developer at Innovate.ai",
+    "content": "The Advanced Prompt Engineering course helped me build resilient AI agents that are now saving our company thousands of hours every month.",
+    "avatar": "https://i.pravatar.cc/150?u=james"
+  },
+  {
+    "id": "t3",
+    "name": "Elena Rodriguez",
+    "role": "Data Science Lead",
+    "content": "Unlike generic platforms, AI Abhyas focuses on the exact skills needed right now in the industry. The RAG content is best-in-class.",
+    "avatar": "https://i.pravatar.cc/150?u=elena"
+  },
+  {
+    "id": "t4",
+    "name": "Michael Chang",
+    "role": "CTO at StartupX",
+    "content": "We trained our entire engineering team through AI Abhyas. The return on investment has been incredible. Highly recommend the enterprise plan.",
+    "avatar": "https://i.pravatar.cc/150?u=michael"
+  },
+  {
+    "id": "t5",
+    "name": "Priya Sharma",
+    "role": "Freelance AI Consultant",
+    "content": "The hands-on projects gave me the confidence to take on complex client work. I landed two major contracts just weeks after completing the certification.",
+    "avatar": "https://i.pravatar.cc/150?u=priya"
+  },
+  {
+    "id": "t6",
+    "name": "David Okafor",
+    "role": "Software Architect",
+    "content": "The depth of the large language model integration module was mind-blowing. It's the most up-to-date and practical course I've taken this year.",
+    "avatar": "https://i.pravatar.cc/150?u=david"
+  }
+]

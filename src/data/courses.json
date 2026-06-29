@@ -1,0 +1,390 @@
+[
+  {
+    "id": "c1",
+    "title": "Generative AI Masterclass",
+    "description": "Deep dive into Large Language Models, diffusion models, and building real-world generative AI applications for enterprise scaling.",
+    "level": "Advanced",
+    "mode": "Hybrid",
+    "status": "Limited Seats",
+    "duration": "12 Weeks",
+    "fee": "₹4,999",
+    "eligibility": "Tech Professionals",
+    "skills": ["Prompt Engineering", "LLM Fine-tuning", "Vector Databases", "LangChain"],
+    "highlights": ["Live Interactive Sessions", "Real Enterprise Projects", "1-on-1 Mentorship", "Official Certification"],
+    "students": "12.4k",
+    "rating": 4.9,
+    "certificateIncluded": true,
+    "lastUpdated": "6/2026",
+    "language": "English",
+    "totalRatings": "4.2k",
+    "isPremium": true,
+    "promoText": "Access 28,000+ top-rated courses with AI Abhyas Personal Plan.",
+    "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "Introduction to GenAI", "hours": 4, "lessons": 10, "resources": 3 },
+      { "id": 2, "title": "Understanding LLMs & Transformers", "hours": 8, "lessons": 15, "resources": 5 },
+      { "id": 3, "title": "Vector Databases & RAG", "hours": 10, "lessons": 18, "resources": 8 },
+      { "id": 4, "title": "Building with LangChain & LlamaIndex", "hours": 12, "lessons": 20, "resources": 10 },
+      { "id": 5, "title": "Capstone: Enterprise Chatbot", "hours": 16, "lessons": 5, "resources": 2 }
+    ],
+    "projects": [
+      { "name": "Enterprise RAG System", "difficulty": "Advanced", "skills": ["LangChain", "Pinecone", "Python"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" },
+      { "name": "Multi-Agent Support Bot", "difficulty": "Advanced", "skills": ["AutoGen", "OpenAI", "React"], "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["ChatGPT", "Claude", "Python", "LangChain", "Pinecone", "GitHub", "Cursor"],
+    "instructor": {
+      "name": "Dr. Sarah Chen",
+      "designation": "Principal AI Engineer",
+      "experience": "12+ Years",
+      "students": "45K+",
+      "courses": 8,
+      "rating": 4.9,
+      "bio": "Former Lead AI Researcher at Tech Giants. Passionate about democratizing AI education.",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c2",
+    "title": "AI Foundations for Everyone",
+    "description": "Master the core concepts of artificial intelligence and machine learning without writing a single line of code.",
+    "level": "Beginner",
+    "mode": "Online",
+    "status": "Open",
+    "duration": "4 Weeks",
+    "fee": "Free",
+    "eligibility": "Anyone",
+    "skills": ["AI Fundamentals", "ChatGPT Mastery", "Workflow Automation", "Prompting"],
+    "highlights": ["Self-Paced Learning", "Daily Quizzes", "Community Access", "Certificate of Completion"],
+    "students": "45.2k",
+    "rating": 4.8,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "What is AI?", "hours": 2, "lessons": 5, "resources": 1 },
+      { "id": 2, "title": "Everyday AI Tools", "hours": 3, "lessons": 8, "resources": 2 },
+      { "id": 3, "title": "Prompt Engineering Basics", "hours": 4, "lessons": 10, "resources": 4 },
+      { "id": 4, "title": "Ethics & Future of AI", "hours": 2, "lessons": 4, "resources": 1 }
+    ],
+    "projects": [
+      { "name": "Personal Assistant Setup", "difficulty": "Beginner", "skills": ["ChatGPT", "Prompting"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["ChatGPT", "Midjourney", "Notion AI", "Canva AI"],
+    "instructor": {
+      "name": "Mark Stevens",
+      "designation": "AI Educator",
+      "experience": "5+ Years",
+      "students": "100K+",
+      "courses": 3,
+      "rating": 4.8,
+      "bio": "Specializes in making complex tech concepts easy for absolute beginners.",
+      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c3",
+    "title": "Machine Learning Engineering",
+    "description": "Learn the mathematics and programming behind traditional machine learning algorithms with Python and deploy them to production.",
+    "level": "Intermediate",
+    "mode": "Offline",
+    "status": "Open",
+    "duration": "8 Weeks",
+    "fee": "₹5,499",
+    "eligibility": "Graduates",
+    "skills": ["Python", "Scikit-Learn", "Data Pipeline", "Model Deployment"],
+    "highlights": ["In-Person Bootcamp", "Capstone Project", "Career Support", "Industry Case Studies"],
+    "students": "8.1k",
+    "rating": 4.7,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "Python Refresher & Pandas", "hours": 6, "lessons": 12, "resources": 4 },
+      { "id": 2, "title": "Supervised Learning", "hours": 10, "lessons": 15, "resources": 5 },
+      { "id": 3, "title": "Unsupervised Learning", "hours": 8, "lessons": 12, "resources": 4 },
+      { "id": 4, "title": "Model Evaluation & Tuning", "hours": 8, "lessons": 10, "resources": 3 },
+      { "id": 5, "title": "MLOps & Deployment", "hours": 10, "lessons": 14, "resources": 6 }
+    ],
+    "projects": [
+      { "name": "House Price Predictor", "difficulty": "Intermediate", "skills": ["Python", "Scikit-Learn", "Flask"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Docker", "AWS"],
+    "instructor": {
+      "name": "Dr. Alan Turing (Pseudonym)",
+      "designation": "Senior ML Engineer",
+      "experience": "10+ Years",
+      "students": "20K+",
+      "courses": 5,
+      "rating": 4.7,
+      "bio": "Building scalable machine learning pipelines at Fortune 500 companies.",
+      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c4",
+    "title": "AI Agents & Automation",
+    "description": "Build autonomous AI agents that can perform complex workflows, browse the web, and interact with your existing APIs.",
+    "level": "Advanced",
+    "mode": "Online",
+    "status": "Coming Soon",
+    "duration": "6 Weeks",
+    "fee": "₹3,499",
+    "eligibility": "Developers",
+    "skills": ["AutoGPT", "API Integration", "Python", "Workflow Design"],
+    "highlights": ["Pre-recorded Modules", "Code Templates", "Discord Community", "Lifetime Access"],
+    "students": "1.2k",
+    "rating": 4.9,
+    "certificateIncluded": false,
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "Intro to Autonomous Agents", "hours": 4, "lessons": 8, "resources": 2 },
+      { "id": 2, "title": "Tool Calling & APIs", "hours": 6, "lessons": 12, "resources": 4 },
+      { "id": 3, "title": "Memory & Planning", "hours": 8, "lessons": 14, "resources": 5 },
+      { "id": 4, "title": "Building with AutoGen", "hours": 10, "lessons": 16, "resources": 6 }
+    ],
+    "projects": [
+      { "name": "Automated Research Agent", "difficulty": "Advanced", "skills": ["Python", "AutoGen", "SerpAPI"], "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["Python", "OpenAI API", "AutoGen", "LangChain", "Make"],
+    "instructor": {
+      "name": "Elena Rodriguez",
+      "designation": "AI Automation Architect",
+      "experience": "8+ Years",
+      "students": "15K+",
+      "courses": 4,
+      "rating": 4.9,
+      "bio": "Pioneer in multi-agent systems and enterprise automation.",
+      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c5",
+    "title": "AI for Business Leaders",
+    "description": "Strategic framework for implementing AI in your organization. Measure ROI, manage risks, and scale AI adoption seamlessly.",
+    "level": "Intermediate",
+    "mode": "Hybrid",
+    "status": "Limited Seats",
+    "duration": "4 Weeks",
+    "fee": "₹5,999",
+    "eligibility": "Executives",
+    "skills": ["AI Strategy", "Risk Management", "ROI Calculation", "Change Management"],
+    "highlights": ["Executive Networking", "Case Studies", "Implementation Playbook", "Certification"],
+    "students": "3.5k",
+    "rating": 4.8,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "AI Landscape & Terminology", "hours": 3, "lessons": 6, "resources": 2 },
+      { "id": 2, "title": "Identifying AI Use Cases", "hours": 4, "lessons": 8, "resources": 3 },
+      { "id": 3, "title": "Ethics, Privacy & Compliance", "hours": 4, "lessons": 7, "resources": 5 },
+      { "id": 4, "title": "Building the AI Roadmap", "hours": 5, "lessons": 10, "resources": 4 }
+    ],
+    "projects": [
+      { "name": "Company AI Strategy Deck", "difficulty": "Intermediate", "skills": ["Strategy", "ROI", "Planning"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["Excel", "PowerPoint", "Miro", "ChatGPT"],
+    "instructor": {
+      "name": "David Kim",
+      "designation": "VP of Strategy",
+      "experience": "15+ Years",
+      "students": "8K+",
+      "courses": 2,
+      "rating": 4.8,
+      "bio": "Former Management Consultant helping Fortune 500s adopt AI securely.",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c6",
+    "title": "Computer Vision Mastery",
+    "description": "Build state-of-the-art vision models for object detection, facial recognition, and medical imaging using PyTorch.",
+    "level": "Advanced",
+    "mode": "Online",
+    "status": "Open",
+    "duration": "10 Weeks",
+    "fee": "₹4,499",
+    "eligibility": "Data Scientists",
+    "skills": ["PyTorch", "CNNs", "Object Detection", "Image Segmentation"],
+    "highlights": ["Cloud GPU Access", "Real-world Datasets", "Peer Code Review", "Final Project"],
+    "students": "5.6k",
+    "rating": 4.9,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "Intro to Computer Vision", "hours": 4, "lessons": 10, "resources": 2 },
+      { "id": 2, "title": "CNNs Architecture", "hours": 8, "lessons": 14, "resources": 4 },
+      { "id": 3, "title": "Object Detection (YOLO)", "hours": 12, "lessons": 20, "resources": 6 },
+      { "id": 4, "title": "Image Segmentation", "hours": 10, "lessons": 16, "resources": 5 },
+      { "id": 5, "title": "Vision Transformers", "hours": 8, "lessons": 12, "resources": 3 }
+    ],
+    "projects": [
+      { "name": "Real-time Defect Detection", "difficulty": "Advanced", "skills": ["PyTorch", "YOLOv8", "OpenCV"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["PyTorch", "OpenCV", "TensorBoard", "Roboflow"],
+    "instructor": {
+      "name": "Dr. Marcus Vance",
+      "designation": "CV Researcher",
+      "experience": "9+ Years",
+      "students": "12K+",
+      "courses": 3,
+      "rating": 4.9,
+      "bio": "Specializes in medical imaging and edge AI deployments.",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c7",
+    "title": "Prompt Engineering Pro",
+    "description": "Learn advanced techniques like Chain of Thought, ReAct, and Few-Shot prompting to maximize the capabilities of AI models.",
+    "level": "Beginner",
+    "mode": "Online",
+    "status": "Open",
+    "duration": "2 Weeks",
+    "fee": "Free",
+    "eligibility": "Anyone",
+    "skills": ["Prompt Design", "Chain of Thought", "LLM Behavior", "Content Generation"],
+    "highlights": ["Bite-sized Lessons", "Interactive Playground", "Cheat Sheets", "Quick Certification"],
+    "students": "22.1k",
+    "rating": 4.7,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "The Anatomy of a Prompt", "hours": 2, "lessons": 5, "resources": 3 },
+      { "id": 2, "title": "Zero-Shot vs Few-Shot", "hours": 3, "lessons": 6, "resources": 2 },
+      { "id": 3, "title": "Advanced Prompting (CoT)", "hours": 4, "lessons": 8, "resources": 4 }
+    ],
+    "projects": [
+      { "name": "Custom System Prompts", "difficulty": "Beginner", "skills": ["Prompting", "Testing"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["ChatGPT", "Claude", "OpenAI Playground"],
+    "instructor": {
+      "name": "Sarah Jenkins",
+      "designation": "AI Content Lead",
+      "experience": "4+ Years",
+      "students": "30K+",
+      "courses": 2,
+      "rating": 4.7,
+      "bio": "Mastering the art of communicating with machines.",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c8",
+    "title": "AI in Healthcare",
+    "description": "Explore how artificial intelligence is revolutionizing diagnostics, drug discovery, and patient care management.",
+    "level": "Intermediate",
+    "mode": "Hybrid",
+    "status": "Closed",
+    "duration": "6 Weeks",
+    "fee": "₹4,999",
+    "eligibility": "Healthcare Pros",
+    "skills": ["Medical AI", "Data Privacy (HIPAA)", "Predictive Analytics", "Ethics"],
+    "highlights": ["Expert Guest Speakers", "Clinical Case Studies", "Compliance Guide", "Certification"],
+    "students": "2.8k",
+    "rating": 4.9,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "AI Basics for Medicine", "hours": 4, "lessons": 8, "resources": 2 },
+      { "id": 2, "title": "Predictive Analytics in Care", "hours": 6, "lessons": 10, "resources": 4 },
+      { "id": 3, "title": "Medical Image Analysis", "hours": 8, "lessons": 12, "resources": 5 },
+      { "id": 4, "title": "Ethics & HIPAA", "hours": 4, "lessons": 6, "resources": 3 }
+    ],
+    "projects": [
+      { "name": "Patient Risk Predictor", "difficulty": "Intermediate", "skills": ["Analytics", "Privacy"], "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["Python", "Scikit-Learn", "AWS HealthLake"],
+    "instructor": {
+      "name": "Dr. Amina Patel",
+      "designation": "Chief Medical Informatics Officer",
+      "experience": "14+ Years",
+      "students": "5K+",
+      "courses": 1,
+      "rating": 4.9,
+      "bio": "Bridging the gap between clinical practice and deep learning.",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c9",
+    "title": "Natural Language Processing",
+    "description": "From TF-IDF to Transformers, learn the complete evolution of NLP and build your own text analysis pipelines.",
+    "level": "Advanced",
+    "mode": "Offline",
+    "status": "Limited Seats",
+    "duration": "8 Weeks",
+    "fee": "₹5,499",
+    "eligibility": "Developers",
+    "skills": ["Transformers", "Hugging Face", "Sentiment Analysis", "Text Generation"],
+    "highlights": ["In-Person Labs", "Hackathon Event", "1-on-1 Mentorship", "Career Fair Access"],
+    "students": "4.3k",
+    "rating": 4.8,
+    "certificateIncluded": true,
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "Text Preprocessing & Regex", "hours": 4, "lessons": 10, "resources": 2 },
+      { "id": 2, "title": "Word Embeddings", "hours": 6, "lessons": 12, "resources": 3 },
+      { "id": 3, "title": "Sequence Models (RNNs)", "hours": 8, "lessons": 14, "resources": 4 },
+      { "id": 4, "title": "Transformers & HuggingFace", "hours": 12, "lessons": 18, "resources": 6 }
+    ],
+    "projects": [
+      { "name": "Custom Sentiment Analyzer", "difficulty": "Advanced", "skills": ["HuggingFace", "PyTorch"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["Python", "HuggingFace", "NLTK", "PyTorch"],
+    "instructor": {
+      "name": "Dr. Sarah Chen",
+      "designation": "Principal AI Engineer",
+      "experience": "12+ Years",
+      "students": "45K+",
+      "courses": 8,
+      "rating": 4.9,
+      "bio": "Former Lead AI Researcher at Tech Giants. Passionate about democratizing AI education.",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  },
+  {
+    "id": "c10",
+    "title": "No-Code AI App Building",
+    "description": "Launch your own AI-powered web applications in minutes using modern no-code platforms and AI APIs.",
+    "level": "Beginner",
+    "mode": "Online",
+    "status": "Open",
+    "duration": "3 Weeks",
+    "fee": "₹2,999",
+    "eligibility": "Entrepreneurs",
+    "skills": ["Bubble", "API Integration", "Rapid Prototyping", "UX Design"],
+    "highlights": ["Build 3 Apps", "Monetization Guide", "Template Library", "Community Support"],
+    "students": "15.7k",
+    "rating": 4.6,
+    "certificateIncluded": false,
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    "curriculum": [
+      { "id": 1, "title": "No-Code Ecosystem", "hours": 2, "lessons": 5, "resources": 2 },
+      { "id": 2, "title": "API Basics for Non-Coders", "hours": 4, "lessons": 8, "resources": 3 },
+      { "id": 3, "title": "Building the UI in Bubble", "hours": 6, "lessons": 12, "resources": 5 },
+      { "id": 4, "title": "Connecting OpenAI API", "hours": 4, "lessons": 8, "resources": 3 }
+    ],
+    "projects": [
+      { "name": "AI Cover Letter Generator", "difficulty": "Beginner", "skills": ["Bubble", "OpenAI API"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
+    ],
+    "tools": ["Bubble", "Make", "OpenAI API", "Figma"],
+    "instructor": {
+      "name": "Tom Hayes",
+      "designation": "Indie Maker",
+      "experience": "6+ Years",
+      "students": "25K+",
+      "courses": 3,
+      "rating": 4.6,
+      "bio": "Teaching non-technical founders how to build scalable products.",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+      "linkedin": "https://linkedin.com"
+    }
+  }
+]

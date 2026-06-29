@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Students",
+    "description": "Future-proof your career by mastering AI early. Build a portfolio of real-world AI projects to stand out.",
+    "icon": "User",
+    "image": "/Assets/images/students.jpg"
+  },
+  {
+    "title": "Professionals",
+    "description": "Automate workflows, boost productivity, and transition into high-paying AI-centric roles in your industry.",
+    "icon": "Briefcase",
+    "image": "/Assets/images/professionals.jpg"
+  },
+  {
+    "title": "Entrepreneurs",
+    "description": "Leverage AI to scale your business, reduce operational costs, and build innovative new products faster.",
+    "icon": "Lightbulb",
+    "image": "/Assets/images/entrepreunss.jpg"
+  },
+  {
+    "title": "Organizations",
+    "description": "Upskill your entire workforce with customized corporate training programs designed for enterprise adoption.",
+    "icon": "Building",
+    "image": "/Assets/images/oranizations.jpg"
+  },
+  {
+    "title": "Creators",
+    "description": "Harness generative AI to accelerate your creative process, design stunning visuals, and scale your content.",
+    "icon": "Palette",
+    "image": "/Assets/images/creators.jpg"
+  }
+]

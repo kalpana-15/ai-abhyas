@@ -1,0 +1,254 @@
+[
+  {
+    "id": "gs1",
+    "category": "Getting Started",
+    "question": "Who can join AI Abhyas?",
+    "answer": "Anyone passionate about learning AI can join. Our programs are designed for students, working professionals, entrepreneurs, educators, and organizations, with courses available for all skill levels."
+  },
+  {
+    "id": "gs2",
+    "category": "Getting Started",
+    "question": "Do I need coding knowledge to start?",
+    "answer": "Not necessarily. Many beginner-friendly courses require no prior coding experience. Advanced programs clearly mention any prerequisites."
+  },
+  {
+    "id": "gs3",
+    "category": "Getting Started",
+    "question": "How do I choose the right course?",
+    "answer": "You can browse courses based on your goals, experience level, and career aspirations. If you're unsure, our advisors can help you choose the most suitable learning path."
+  },
+  {
+    "id": "gs4",
+    "category": "Getting Started",
+    "question": "How do I enroll in a course?",
+    "answer": "Simply explore the course catalog, select your preferred course, create an account or log in, complete the enrollment form, and proceed with payment if required."
+  },
+  {
+    "id": "gs5",
+    "category": "Getting Started",
+    "question": "Can I enroll in more than one course?",
+    "answer": "Yes. You can enroll in multiple courses simultaneously and manage all your learning from your personal dashboard."
+  },
+  {
+    "id": "gs6",
+    "category": "Getting Started",
+    "question": "What are the system requirements for these courses?",
+    "answer": "A standard laptop or desktop with a stable internet connection is sufficient. Any specific software requirements will be communicated before the course begins."
+  },
+  {
+    "id": "c1",
+    "category": "Courses",
+    "question": "What types of AI courses are available?",
+    "answer": "We offer courses in Generative AI, Prompt Engineering, AI Tools, Machine Learning, AI Automation, Business AI, and more, designed for practical, real-world applications."
+  },
+  {
+    "id": "c2",
+    "category": "Courses",
+    "question": "How long does a course usually last?",
+    "answer": "Course duration varies depending on the program. Most courses range from a few weeks to several months, with detailed schedules provided on each course page."
+  },
+  {
+    "id": "c3",
+    "category": "Courses",
+    "question": "Are the courses live or self-paced?",
+    "answer": "Depending on the program, courses may include live instructor-led sessions, recorded lectures, or a combination of both to provide maximum flexibility."
+  },
+  {
+    "id": "c4",
+    "category": "Courses",
+    "question": "Will I work on practical projects?",
+    "answer": "Yes. Every course emphasizes hands-on learning through assignments, real-world case studies, and practical AI projects."
+  },
+  {
+    "id": "c5",
+    "category": "Courses",
+    "question": "Can I access course content after completion?",
+    "answer": "Yes. Most courses include continued access to learning resources and recordings for future reference, subject to the course policy."
+  },
+  {
+    "id": "c6",
+    "category": "Courses",
+    "question": "Are the courses suitable for international students?",
+    "answer": "Yes, our programs are accessible globally. We also schedule live sessions at accommodating times for multiple time zones."
+  },
+  {
+    "id": "l1",
+    "category": "Learning",
+    "question": "What learning materials are provided?",
+    "answer": "Learners receive comprehensive notes, presentations, templates, AI guides, cheat sheets, recorded sessions, and additional reference materials."
+  },
+  {
+    "id": "l2",
+    "category": "Learning",
+    "question": "Are class recordings available?",
+    "answer": "Yes. Live sessions are recorded and made available to enrolled learners so they can revisit concepts anytime."
+  },
+  {
+    "id": "l3",
+    "category": "Learning",
+    "question": "How are assessments conducted?",
+    "answer": "Assessments include quizzes, practical assignments, project submissions, and evaluations to measure your understanding and practical skills."
+  },
+  {
+    "id": "l4",
+    "category": "Learning",
+    "question": "Will I receive mentorship?",
+    "answer": "Yes. Many programs include mentorship sessions where learners can interact with instructors, clarify doubts, and receive career guidance."
+  },
+  {
+    "id": "l5",
+    "category": "Learning",
+    "question": "Can I learn at my own pace?",
+    "answer": "While live sessions follow a schedule, recordings and learning resources allow you to revisit lessons and continue learning at your own pace."
+  },
+  {
+    "id": "l6",
+    "category": "Learning",
+    "question": "Is there a community forum for students?",
+    "answer": "Yes, all enrolled learners get access to our exclusive community platform to network, ask questions, and collaborate on projects."
+  },
+  {
+    "id": "cert1",
+    "category": "Certifications",
+    "question": "Will I receive a certificate after completing the course?",
+    "answer": "Yes. Learners who successfully complete the course requirements and assessments receive an AI Abhyas certificate."
+  },
+  {
+    "id": "cert2",
+    "category": "Certifications",
+    "question": "How can employers verify my certificate?",
+    "answer": "Each certificate includes a unique Certificate ID and QR code that allows employers or institutions to verify its authenticity online."
+  },
+  {
+    "id": "cert3",
+    "category": "Certifications",
+    "question": "Can I add my certificate to LinkedIn?",
+    "answer": "Absolutely. You can showcase your certificate on LinkedIn, your resume, portfolio, and other professional platforms."
+  },
+  {
+    "id": "cert4",
+    "category": "Certifications",
+    "question": "Are certificates recognized?",
+    "answer": "Our certifications demonstrate practical AI competencies and are designed to showcase your skills for academic and professional opportunities."
+  },
+  {
+    "id": "cert5",
+    "category": "Certifications",
+    "question": "Do all courses include certification?",
+    "answer": "Most courses include certification. Any exceptions will be clearly mentioned on the respective course page."
+  },
+  {
+    "id": "cert6",
+    "category": "Certifications",
+    "question": "Do the certifications expire?",
+    "answer": "No, our certifications do not expire. They serve as a lifelong verifiable proof of your acquired skills."
+  },
+  {
+    "id": "p1",
+    "category": "Payments",
+    "question": "What payment methods are accepted?",
+    "answer": "We accept major debit cards, credit cards, UPI, net banking, and other secure online payment methods."
+  },
+  {
+    "id": "p2",
+    "category": "Payments",
+    "question": "Can I pay in installments?",
+    "answer": "Selected programs may offer installment or EMI options. Availability depends on the specific course."
+  },
+  {
+    "id": "p3",
+    "category": "Payments",
+    "question": "Will I receive a payment receipt?",
+    "answer": "Yes. A digital payment receipt is automatically generated and sent to your registered email after successful payment."
+  },
+  {
+    "id": "p4",
+    "category": "Payments",
+    "question": "Are refunds available?",
+    "answer": "Refund eligibility depends on the course and cancellation policy. Please review the course-specific refund terms before enrolling."
+  },
+  {
+    "id": "p5",
+    "category": "Payments",
+    "question": "Is my payment information secure?",
+    "answer": "Yes. All payments are processed through trusted and secure payment gateways using industry-standard encryption."
+  },
+  {
+    "id": "p6",
+    "category": "Payments",
+    "question": "Are there any hidden fees?",
+    "answer": "No, the course fees mentioned on our website are all-inclusive. There are no hidden charges or additional costs."
+  },
+  {
+    "id": "corp1",
+    "category": "Corporate",
+    "question": "Do you offer corporate AI training?",
+    "answer": "Yes. We provide customized AI training programs tailored to organizations, teams, and departments."
+  },
+  {
+    "id": "corp2",
+    "category": "Corporate",
+    "question": "Can training be customized for our industry?",
+    "answer": "Absolutely. We design programs based on your organization's industry, workflows, and business objectives."
+  },
+  {
+    "id": "corp3",
+    "category": "Corporate",
+    "question": "Are workshops available for colleges and institutions?",
+    "answer": "Yes. AI Abhyas collaborates with educational institutions to conduct workshops, seminars, bootcamps, and faculty development programs."
+  },
+  {
+    "id": "corp4",
+    "category": "Corporate",
+    "question": "Can training be conducted on-site?",
+    "answer": "Yes. We offer on-campus, on-site corporate, and online training depending on your requirements."
+  },
+  {
+    "id": "corp5",
+    "category": "Corporate",
+    "question": "How do we request a corporate training proposal?",
+    "answer": "You can contact our team through the Contact page or speak directly with an advisor to discuss your organization's training requirements."
+  },
+  {
+    "id": "corp6",
+    "category": "Corporate",
+    "question": "Can we track our employees' progress?",
+    "answer": "Yes, we provide dedicated dashboards for corporate partners to monitor attendance, project completion, and overall progress."
+  },
+  {
+    "id": "s1",
+    "category": "Support",
+    "question": "How can I contact AI Abhyas?",
+    "answer": "You can reach us through our Contact page, email, phone, or WhatsApp for assistance with courses, enrollment, and technical support."
+  },
+  {
+    "id": "s2",
+    "category": "Support",
+    "question": "What if I miss a live session?",
+    "answer": "Don't worry. Recorded sessions are made available so you can catch up at your convenience."
+  },
+  {
+    "id": "s3",
+    "category": "Support",
+    "question": "I'm facing a technical issue. What should I do?",
+    "answer": "Our support team is available to help you resolve login issues, payment concerns, dashboard access problems, and other technical queries."
+  },
+  {
+    "id": "s4",
+    "category": "Support",
+    "question": "Can I update my profile information later?",
+    "answer": "Yes. You can edit your personal details, contact information, and profile settings from your learner dashboard."
+  },
+  {
+    "id": "s5",
+    "category": "Support",
+    "question": "How quickly will I receive support?",
+    "answer": "We aim to respond to all support requests within one business day, with many queries resolved much sooner depending on their nature."
+  },
+  {
+    "id": "s6",
+    "category": "Support",
+    "question": "Is support available on weekends?",
+    "answer": "Our primary support hours are during weekdays, but we offer limited email support on weekends for urgent technical issues."
+  }
+]
