@@ -8,6 +8,7 @@ import { FAQ } from "@/types";
 import { GraduationCap, MonitorPlay, BookOpen, Award, CreditCard, Building2, HelpCircle, PhoneCall, ArrowRight, Headset, Mail, MessageSquare, Rocket, ShieldCheck, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const CATEGORIES = [
   { id: "Getting Started", icon: Rocket },
@@ -28,7 +29,7 @@ export function FAQSection() {
 
   return (
     <section id="faq" className="py-24 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-6xl">
+      <div className="mx-auto max-w-[1200px] w-full px-4 md:px-6 relative z-10">
         
         {/* Decorative Background Elements */}
         <div className="absolute top-10 right-[10%] hidden lg:block opacity-70 dark:opacity-20 pointer-events-none z-0">
@@ -61,7 +62,7 @@ export function FAQSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-heading font-bold md:font-extrabold mb-6 tracking-tight text-foreground"
+            className="text-3xl md:text-5xl font-heading font-bold mb-6 tracking-tight text-foreground"
           >
             Frequently Asked <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">Questions</span>
           </motion.h2>
@@ -84,12 +85,13 @@ export function FAQSection() {
         <div className="grid lg:grid-cols-[28%_72%] bg-card rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] border border-border/50 overflow-hidden divide-y lg:divide-y-0 lg:divide-x divide-border/50 relative z-10">
           
           {/* Left Column: Categories Sidebar */}
-          <div className="flex flex-col justify-between gap-8 p-6 lg:p-8 bg-muted/10">
-            <div>
-              <h3 className="font-heading font-bold mb-6 text-lg tracking-wide text-foreground">
+          <div className="bg-muted/10 relative">
+            <div className="flex flex-col gap-8 p-6 lg:p-8 lg:sticky lg:top-28">
+            <div className="w-full max-w-[100vw] overflow-hidden">
+              <h3 className="font-heading font-bold mb-4 lg:mb-6 text-lg tracking-wide text-foreground">
                 Browse by Category
               </h3>
-              <ul className="flex flex-col gap-1.5">
+              <ul className="flex flex-row lg:flex-col flex-wrap gap-2.5 pb-2 lg:pb-0 w-full">
                 {CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.id;
@@ -97,17 +99,17 @@ export function FAQSection() {
                     <li key={cat.id}>
                       <button
                         onClick={() => setActiveCategory(cat.id)}
-                        className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 text-left ${
+                        className={`flex items-center justify-between px-4 lg:px-4 py-2.5 lg:py-3 rounded-full lg:rounded-xl transition-all duration-300 text-left text-sm whitespace-nowrap lg:w-full ${
                           isActive 
                             ? "bg-primary text-primary-foreground font-semibold shadow-md shadow-primary/20" 
-                            : "bg-transparent text-muted-foreground hover:bg-muted/80 hover:text-foreground font-medium"
+                            : "bg-background lg:bg-transparent text-muted-foreground hover:bg-muted/80 hover:text-foreground font-medium border border-border/60 lg:border-transparent"
                         }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <Icon className={`w-5 h-5 ${isActive ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                        <div className="flex items-center gap-2 lg:gap-3">
+                          <Icon className={`w-4 h-4 ${isActive ? "text-primary-foreground" : "text-muted-foreground"}`} />
                           {cat.id}
                         </div>
-                        {!isActive && <ChevronRight className="w-4 h-4 opacity-50" />}
+                        {!isActive && <ChevronRight className="hidden lg:block w-4 h-4 opacity-50 ml-4" />}
                       </button>
                     </li>
                   );
@@ -116,21 +118,24 @@ export function FAQSection() {
             </div>
 
             {/* Need Help Box */}
-            <div className="mt-4 p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 flex flex-col gap-3 relative overflow-hidden">
-              <h4 className="font-bold font-heading text-foreground z-10">Need Help?</h4>
-              <p className="text-xs text-muted-foreground z-10 max-w-[70%]">Can't find the answer you're looking for?</p>
-              <Button className="w-fit group bg-primary hover:bg-primary/90 text-white rounded-lg mt-2 z-10 text-xs px-4 h-9">
-                Talk to Advisor
-                <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <div className="absolute -bottom-2 -right-4 w-28 h-28 opacity-90">
+            <div className="hidden lg:flex mt-2 p-4 md:p-5 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 flex-col gap-2 relative overflow-hidden">
+              <h4 className="font-bold font-heading text-sm text-foreground z-10">Need Help?</h4>
+              <p className="text-[11px] text-muted-foreground z-10 max-w-[70%] leading-snug">Can't find the answer you're looking for?</p>
+              <Link href="/contact" className="w-fit z-10 mt-1">
+                <Button className="w-fit group bg-primary hover:bg-primary/90 text-white rounded-lg text-[11px] px-3 h-8">
+                  Talk to Advisor
+                  <ArrowRight className="w-3 h-3 ml-1.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <div className="absolute -bottom-1 -right-2 w-[88px] h-[88px] opacity-95">
                 <Image src="/Assets/images/robo_white_.png" alt="Robot" fill className="object-contain" />
               </div>
+            </div>
             </div>
           </div>
 
           {/* Right Column: Accordion Questions */}
-          <div className="p-8 lg:p-10 w-full overflow-hidden">
+          <div className="p-6 lg:p-8 w-full overflow-hidden">
             <h3 className="font-heading font-bold mb-6 text-lg tracking-wide text-foreground">
               Most Asked Questions
             </h3>

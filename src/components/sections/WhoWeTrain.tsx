@@ -41,7 +41,7 @@ export function WhoWeTrain() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-heading font-bold md:font-extrabold mb-6 tracking-tight text-foreground"
+            className="text-3xl md:text-5xl font-heading font-bold mb-6 tracking-tight text-foreground"
           >
             Who We <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">Train</span>
           </motion.h2>
@@ -53,12 +53,12 @@ export function WhoWeTrain() {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto"
           >
-            Whether you are just starting out or leading a massive enterprise, we have a learning path tailored exactly to your goals.
+            Find the perfect AI learning path, from beginner to pro.
           </motion.p>
         </div>
 
         {/* Expandable Image Accordion */}
-        <div className="flex flex-col md:flex-row h-[800px] md:h-[500px] gap-4 w-full max-w-6xl mx-auto md:px-8 lg:px-16">
+        <div className="flex flex-col md:flex-row h-[800px] md:h-[500px] gap-4 w-full max-w-[1200px] mx-auto px-4 md:px-6">
           {audiences.map((audience, index) => {
             const Icon = audience.icon;
             const isActive = activeIndex === index;
@@ -66,7 +66,7 @@ export function WhoWeTrain() {
             // Uniform border styling for dark and light mode
             const borderClass = isActive 
               ? "border-primary shadow-[0_0_15px_hsl(var(--primary)/0.3)]" 
-              : "border-border hover:border-primary/50";
+              : "border-primary/20 hover:border-primary/50";
 
             return (
               <motion.div
@@ -76,8 +76,8 @@ export function WhoWeTrain() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ opacity: { duration: 0.5, delay: index * 0.1 } }}
-                className={`relative overflow-hidden rounded-3xl cursor-pointer group bg-card border-2 transition-all duration-700 ease-out min-h-[100px] ${borderClass} ${
-                  isActive ? "flex-[7]" : "flex-[1]"
+                className={`relative overflow-hidden rounded-[36px] cursor-pointer group bg-card border-2 transition-all duration-700 ease-out min-h-[100px] ${borderClass} ${
+                  isActive ? "flex-[10]" : "flex-[1]"
                 }`}
               >
                 {/* Background Image */}
@@ -121,8 +121,8 @@ export function WhoWeTrain() {
                         transition={{ duration: 0.3, delay: 0.1 }}
                         className="flex flex-col"
                       >
-                        <div className="flex flex-row flex-wrap items-center justify-between gap-4">
-                          <h3 className="text-2xl md:text-3xl font-heading font-bold">
+                        <div className="flex flex-row flex-nowrap items-center justify-between gap-2 md:gap-4 w-full">
+                          <h3 className="text-base md:text-2xl font-heading font-bold truncate pr-2">
                             {audience.title}
                           </h3>
                           <motion.div
@@ -132,7 +132,7 @@ export function WhoWeTrain() {
                           >
                             <Link 
                               href="/courses" 
-                              className="inline-flex shrink-0 items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
+                              className="inline-flex shrink-0 items-center justify-center rounded-full bg-primary px-3 py-1.5 md:px-5 md:py-2.5 text-xs md:text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg"
                               onClick={(e) => e.stopPropagation()}
                             >
                               Explore Courses
@@ -144,7 +144,7 @@ export function WhoWeTrain() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.2 }}
-                          className="text-white/80 mt-3 text-sm md:text-base leading-relaxed"
+                          className="text-white/80 mt-3 text-xs md:text-base leading-relaxed"
                         >
                           {audience.shortDesc}
                         </motion.p>

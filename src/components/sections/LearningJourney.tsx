@@ -73,7 +73,7 @@ export function LearningJourney() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-3xl md:text-5xl font-heading font-bold md:font-extrabold mb-6 tracking-tight text-foreground"
+          className="text-3xl md:text-5xl font-heading font-bold mb-6 tracking-tight text-foreground"
         >
           Your AI Learning <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">Journey</span>
         </motion.h2>
@@ -85,13 +85,13 @@ export function LearningJourney() {
           transition={{ delay: 0.2 }}
           className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto"
         >
-          A structured pathway designed to help you learn, practice, assess, and demonstrate real-world AI skills.
+          A structured pathway to learn, practice, and master real-world AI skills.
         </motion.p>
       </div>
 
       {/* Desktop Winding Timeline (Hidden on mobile) */}
-      <div className="w-full overflow-x-auto py-24 px-4 scrollbar-hide relative z-10 hidden md:block" ref={containerRef}>
-        <div className="relative w-full min-w-[1200px] max-w-[1300px] mx-auto aspect-[4/1]">
+      <div className="w-full overflow-x-auto py-24 px-0 scrollbar-hide relative z-10 hidden md:block" ref={containerRef}>
+        <div className="relative w-full min-w-[1200px] max-w-full mx-auto aspect-[4/1]">
           
           {/* SVG Road Background */}
           <div className="absolute inset-0 z-0">
@@ -281,10 +281,10 @@ export function LearningJourney() {
               >
                 {/* Node Ball */}
                 <div 
-                  className="absolute w-[48px] h-[48px] rounded-full bg-background flex items-center justify-center shadow-[0_5px_15px_rgba(0,0,0,0.15)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-solid"
-                  style={{ top: '-24px', left: '-24px', borderColor: step.color }}
+                  className="absolute w-[36px] h-[36px] rounded-full bg-background flex items-center justify-center shadow-[0_5px_15px_rgba(0,0,0,0.15)] dark:shadow-[0_5px_15px_rgba(0,0,0,0.4)] border border-solid"
+                  style={{ top: '-18px', left: '-18px', borderColor: step.color }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: step.color }} />
+                  <Icon className="w-4 h-4" style={{ color: step.color }} />
                 </div>
 
                 {/* Connector */}
@@ -292,37 +292,37 @@ export function LearningJourney() {
                   className="absolute h-[2px] bg-border dark:bg-muted"
                   style={{
                     top: 0,
-                    width: '30px',
-                    ...(isLeftText ? { right: '24px' } : { left: '24px' })
+                    width: '20px',
+                    ...(isLeftText ? { right: '18px' } : { left: '18px' })
                   }}
                 >
                   <div 
-                    className="absolute w-[8px] h-[8px] rounded-full bg-background border-[2px]"
+                    className="absolute w-[6px] h-[6px] rounded-full bg-background border-[2px]"
                     style={{
                       borderColor: step.color,
-                      top: '-3px',
-                      ...(isLeftText ? { left: '-4px' } : { right: '-4px' })
+                      top: '-2px',
+                      ...(isLeftText ? { left: '-3px' } : { right: '-3px' })
                     }}
                   />
                 </div>
 
                 {/* Content Box */}
                 <div 
-                  className={`absolute w-[120px] sm:w-[150px] flex flex-col justify-center ${isLeftText ? 'items-end text-right' : 'items-start text-left'}`}
+                  className={`absolute w-[110px] sm:w-[130px] flex flex-col justify-center ${isLeftText ? 'items-end text-right' : 'items-start text-left'}`}
                   style={{
                     top: '0', 
                     transform: 'translateY(-50%)',
-                    ...(isLeftText ? { right: '55px' } : { left: '55px' })
+                    ...(isLeftText ? { right: '45px' } : { left: '45px' })
                   }}
                 >
                   <h3 
-                    className="text-[10px] font-heading font-bold mb-1 uppercase tracking-widest"
+                    className="text-[9px] font-heading font-bold mb-1 uppercase tracking-widest"
                     style={{ color: step.color }}
                   >
                     Step 0{i + 1}
                   </h3>
-                  <div className="font-heading font-bold text-foreground text-sm leading-tight mb-1">{step.title}</div>
-                  <p className="text-[11px] text-muted-foreground leading-tight">
+                  <div className="font-heading font-bold text-foreground text-xs leading-tight mb-1">{step.title}</div>
+                  <p className="text-[10px] text-muted-foreground leading-tight">
                     {step.description.replace('\n', ' ')}
                   </p>
                 </div>

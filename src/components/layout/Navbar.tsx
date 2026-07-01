@@ -76,8 +76,10 @@ export function Navbar() {
                       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 translate-y-2 invisible group-hover/dropdown:visible group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 transition-all duration-200 w-48 z-50">
                         <div className="bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-xl p-3 flex flex-col gap-2 items-start">
                           <NavLink href="/courses?mode=online#course-catalog" className="px-2 w-fit">Online Courses</NavLink>
+                          {/* 
                           <NavLink href="/courses?mode=offline#course-catalog" className="px-2 w-fit">Offline Courses</NavLink>
                           <NavLink href="/courses?mode=hybrid#course-catalog" className="px-2 w-fit">Hybrid Courses</NavLink>
+                          */}
                         </div>
                       </div>
                     </div>
@@ -103,8 +105,10 @@ export function Navbar() {
                       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 translate-y-2 invisible group-hover/dropdown:visible group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 transition-all duration-200 w-48 z-50">
                         <div className="bg-background/95 backdrop-blur-md border border-border rounded-xl shadow-xl p-3 flex flex-col gap-2 items-start">
                           <NavLink href="/courses?mode=online#course-catalog" className="px-2 w-fit">Online Courses</NavLink>
+                          {/* 
                           <NavLink href="/courses?mode=offline#course-catalog" className="px-2 w-fit">Offline Courses</NavLink>
                           <NavLink href="/courses?mode=hybrid#course-catalog" className="px-2 w-fit">Hybrid Courses</NavLink>
+                          */}
                         </div>
                       </div>
                     </div>

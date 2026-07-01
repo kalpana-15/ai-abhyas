@@ -103,13 +103,13 @@ export function AnimatedBentoGrid({ articles }: AnimatedBentoGridProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-rows-[auto] lg:grid-rows-[repeat(3,220px)] gap-6 lg:auto-rows-[220px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-rows-[auto] lg:grid-rows-[repeat(3,200px)] gap-6 lg:auto-rows-[200px]">
       {slotIndices.map((articleIndex, slotIndex) => {
         const article = articles[articleIndex];
         const config = blockConfigs[slotIndex];
 
         return (
-          <div key={`slot-${slotIndex}`} className={`relative rounded-[2.5rem] overflow-hidden group shadow-2xl border-2 border-primary/20 hover:border-primary/60 transition-colors duration-500 ${config.className} ${config.isWide ? 'h-[220px] lg:h-auto' : 'h-[460px] lg:h-auto'}`}>
+          <div key={`slot-${slotIndex}`} className={`relative rounded-[2.5rem] overflow-hidden group shadow-2xl border-2 border-primary/20 hover:border-primary/60 transition-colors duration-500 ${config.className} h-[420px] lg:h-auto`}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={article.id}
@@ -132,11 +132,11 @@ export function AnimatedBentoGrid({ articles }: AnimatedBentoGridProps) {
 
                 <Link href={`/blog/${article.slug}`} className="block w-full h-full p-6 md:p-8 relative z-10">
                   <div className="flex flex-col justify-between h-full">
-                    <span className={`text-[10px] font-bold uppercase tracking-wider w-fit px-3 py-1 rounded-full ${config.categoryBg} ${config.categoryText} shadow-md`}>
+                    <span className={`text-[9px] font-bold uppercase tracking-wider w-fit px-2.5 py-0.5 rounded-full ${config.categoryBg} ${config.categoryText} shadow-md`}>
                       {article.category}
                     </span>
                     <div>
-                      <h3 className={`text-lg md:text-xl font-bold transition-colors mb-2 leading-tight drop-shadow-md ${config.titleColor}`}>
+                      <h3 className={`text-base md:text-lg font-bold transition-colors mb-2 leading-tight drop-shadow-md ${config.titleColor}`}>
                         {article.title}
                       </h3>
                       

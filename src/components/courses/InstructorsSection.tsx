@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export function InstructorsSection() {
   return (
     <section className="py-24 bg-muted/30 border-y border-border">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="mx-auto max-w-[1200px] w-full px-4 md:px-6">
         <SectionHeading
           badge="Expert Instructors"
           title={<>Learn from Industry <span className="text-primary">Professionals</span></>}

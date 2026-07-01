@@ -7,25 +7,25 @@ import { cn } from "@/lib/utils";
 
 const footerLinks = {
   courses: [
-    { label: "AI Foundations", href: "#" },
-    { label: "Generative AI Masterclass", href: "#" },
-    { label: "Prompt Engineering Bootcamp", href: "#" },
-    { label: "Machine Learning Essentials", href: "#" },
+    { label: "AI Foundations", href: "/courses/c2" },
+    { label: "Generative AI Masterclass", href: "/courses/c1" },
+    { label: "Prompt Engineering Bootcamp", href: "/courses/c7" },
+    { label: "Machine Learning Essentials", href: "/courses/c3" },
     { label: "View All Courses", href: "/courses" },
   ],
   modes: [
-    { label: "Online Training", href: "#" },
-    { label: "On-Campus Training", href: "#" },
-    { label: "Corporate Training", href: "#" },
-    { label: "Workshops & Bootcamps", href: "#" },
-    { label: "Institution Partnerships", href: "#" },
+    { label: "Online Training", href: "/" },
+    { label: "On-Campus Training", href: "/" },
+    { label: "Corporate Training", href: "/" },
+    { label: "Workshops & Bootcamps", href: "/" },
+    { label: "Institution Partnerships", href: "/" },
   ],
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Success Stories", href: "#" },
+    { label: "Our Team", href: "/team" },
     { label: "Blog", href: "/blog" },
     { label: "Contact Us", href: "/contact" },
-    { label: "FAQs", href: "#" },
+    { label: "FAQs", href: "/#faq" },
   ],
   resources: [
     { label: "Learning Resources", href: "#" },
@@ -227,7 +227,7 @@ export function Footer() {
           
           {/* Right */}
           <div>
-            <ThemeToggle />
+            
           </div>
         </div>
       </div>

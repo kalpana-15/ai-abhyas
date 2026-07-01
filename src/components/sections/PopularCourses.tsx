@@ -11,7 +11,7 @@ import coursesData from "@/data/courses.json";
 export function PopularCourses() {
   return (
     <section className="py-24 bg-muted/30 relative">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div className="container mx-auto px-4 md:px-6 max-w-[1200px]">
         <div className="text-center max-w-4xl mx-auto mb-16 px-4 flex flex-col items-center">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ export function PopularCourses() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-heading font-bold md:font-extrabold mb-6 tracking-tight text-foreground"
+            className="text-3xl md:text-5xl font-heading font-bold mb-6 tracking-tight text-foreground"
           >
             Top Courses at <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">AI Abhyas</span>
           </motion.h2>
@@ -40,12 +40,12 @@ export function PopularCourses() {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto"
           >
-            Most loved courses by our learners to help you master AI skills and boost your career.
+            Master AI skills and boost your career with our top-rated courses.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {coursesData.slice(0, 4).map((course, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {coursesData.slice(0, 3).map((course, index) => (
             <motion.div
               key={course.id}
               initial={{ opacity: 0, y: 30 }}

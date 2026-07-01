@@ -63,12 +63,12 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
         >
-          <Link href="/courses">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base">
+          <Link href="/courses" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-14 px-8 text-base">
               Explore Courses <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="h-14 px-8 text-base border-border bg-background/50 backdrop-blur-sm hover:bg-muted">
+          <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-base border-border bg-background/50 backdrop-blur-sm hover:bg-muted">
             Talk to an Advisor
           </Button>
         </motion.div>

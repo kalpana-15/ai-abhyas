@@ -44,7 +44,7 @@ export default async function CourseDetailsPage({ params }: { params: Promise<{ 
         {/* Solid Hero Background matching theme with a gap from top */}
         <div className="absolute top-16 lg:top-20 left-0 right-0 h-[500px] lg:h-[450px] bg-muted dark:bg-card border-y border-border z-0" />
         
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="mx-auto max-w-[1200px] w-full px-4 md:px-6 relative z-10">
           <div className="grid lg:grid-cols-[1fr_380px] gap-12 relative items-start">
             
             <div className="flex flex-col gap-[78px] w-full max-w-4xl pb-16">

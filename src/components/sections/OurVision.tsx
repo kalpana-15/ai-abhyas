@@ -72,7 +72,7 @@ export const OurVision = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Column: Vision Text & Card */}
-          <div className="flex flex-col items-start text-left max-w-xl mx-auto lg:mx-0">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-xl mx-auto lg:mx-0 lg:pl-[31px]">
 
             {/* Header Content (Moved to left) */}
             <motion.div 
@@ -168,7 +168,7 @@ export const OurVision = () => {
                         <Icon className="w-7 h-7 md:w-8 md:h-8 opacity-95 drop-shadow-md" strokeWidth={2} />
                       </div>
                       <div className={`flex flex-col justify-center ${slice.titleClass || ''}`}>
-                        <h3 className="font-extrabold text-[11px] md:text-[13px] tracking-wider drop-shadow-md whitespace-nowrap">{slice.title}</h3>
+                        <h3 className="font-extrabold text-[9px] md:text-[11px] tracking-wide drop-shadow-md whitespace-nowrap">{slice.title}</h3>
                       </div>
                     </div>
                   </motion.div>

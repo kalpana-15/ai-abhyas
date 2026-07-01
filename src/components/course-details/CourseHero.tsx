@@ -92,11 +92,11 @@ export function CourseHero({ course, instructor }: { course: any; instructor?: a
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex flex-col sm:flex-row items-stretch bg-background border border-border rounded-xl overflow-hidden shadow-lg w-full max-w-3xl"
         >
-          {/* Left premium section */}
-          {course.isPremium && (
+          {/* Left badge section */}
+          {course.mode && (
             <div className="bg-primary text-primary-foreground p-4 flex flex-col items-center justify-center min-w-[120px]">
               <CheckCircle className="w-6 h-6 mb-1" />
-              <span className="font-bold text-sm tracking-wide">Premium</span>
+              <span className="font-bold text-sm tracking-wide">{course.mode}</span>
             </div>
           )}
           
@@ -111,31 +111,21 @@ export function CourseHero({ course, instructor }: { course: any; instructor?: a
 
           {/* Right Stats */}
           <div className="flex items-center justify-around sm:justify-center gap-8 p-5 min-w-[200px]">
-            {course.rating && (
+            {course.level && (
               <div className="flex flex-col items-center text-center">
-                <span className="text-xl font-bold font-heading text-foreground">{course.rating}</span>
-                <div className="flex text-amber-500 my-1">
-                  <Star className="w-3 h-3 fill-amber-500" />
-                  <Star className="w-3 h-3 fill-amber-500" />
-                  <Star className="w-3 h-3 fill-amber-500" />
-                  <Star className="w-3 h-3 fill-amber-500" />
-                  <Star className="w-3 h-3 fill-amber-500" />
-                </div>
-                {course.totalRatings && (
-                  <span className="text-xs text-muted-foreground underline cursor-pointer hover:text-primary transition-colors">{course.totalRatings} ratings</span>
-                )}
+                <span className="text-lg font-bold font-heading text-foreground whitespace-nowrap">{course.level}</span>
+                <span className="text-[11px] text-muted-foreground uppercase tracking-widest mt-1">Skill Level</span>
               </div>
             )}
             
-            {course.rating && course.students && (
+            {course.level && course.duration && (
               <div className="w-px h-12 bg-border hidden sm:block" />
             )}
             
-            {course.students && (
+            {course.duration && (
               <div className="flex flex-col items-center text-center">
-                <Users className="w-5 h-5 text-foreground mb-1" />
-                <span className="text-base font-bold font-heading text-foreground">{course.students}</span>
-                <span className="text-xs text-muted-foreground">learners</span>
+                <span className="text-lg font-bold font-heading text-foreground whitespace-nowrap">{course.duration}</span>
+                <span className="text-[11px] text-muted-foreground uppercase tracking-widest mt-1">Duration</span>
               </div>
             )}
           </div>

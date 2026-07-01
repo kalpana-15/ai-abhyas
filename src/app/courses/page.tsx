@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { CourseCatalog } from "@/components/courses/CourseCatalog";
 import { InstructorsSection } from "@/components/courses/InstructorsSection";
-import { FAQSection } from "@/components/sections/FAQSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -43,17 +42,17 @@ export default function CoursesPage() {
           <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px]" />
         </div>
 
-        <div className="container relative z-10 mx-auto px-4 md:px-6">
+        <div className="mx-auto max-w-[1200px] w-full relative z-10 px-4 md:px-6">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
             
             {/* Text Content */}
-            <div className="flex-1 text-center lg:text-left relative z-20">
+            <div className="flex-1 flex flex-col items-center text-center lg:items-start lg:text-left relative z-20 lg:-mt-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary mb-6">
                 <Sparkles className="w-4 h-4" />
                 <span className="text-sm font-semibold tracking-wide uppercase">Explore AI Courses</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight mb-6 leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight mb-6 leading-[1.1] max-w-4xl">
                 Find Your <span className="text-primary">AI Course</span>
               </h1>
               
@@ -61,7 +60,7 @@ export default function CoursesPage() {
                 Browse industry-focused AI courses built around hands-on learning, live training, real-world projects, assessments, and verifiable certifications.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
                 <Link href="#course-catalog">
                   <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base bg-primary hover:bg-primary/90">
                     Find Your Course
@@ -115,8 +114,7 @@ export default function CoursesPage() {
       {/* Featured Instructors Section */}
       <InstructorsSection />
 
-      {/* FAQ Section */}
-      <FAQSection />
+
 
       {/* Final CTA */}
       <FinalCTA />

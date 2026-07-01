@@ -53,38 +53,41 @@ export function TrainingObjectives() {
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none -z-10" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none -z-10" />
       
-      {/* Header */}
-      <div className="text-center mb-16 max-w-3xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-4"
-        >
-          <Rocket className="w-4 h-4 text-primary" />
-          <span>Training Objectives</span>
-        </motion.div>
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4"
-        >
-          Building Skills That <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Drive Success</span>
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-lg text-muted-foreground max-w-2xl mx-auto"
-        >
-          Our training is designed with clear objectives that help learners grow, apply, and succeed in the real world.
-        </motion.p>
-      </div>
+      {/* Main Container aligned with Navbar (1200px) and Hero Text (31px padding) */}
+      <div className="w-full max-w-[1200px] mx-auto px-4 md:px-6 lg:px-[31px] relative">
+        
+        {/* Header */}
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left mb-16 max-w-3xl mx-auto lg:mx-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-4"
+          >
+            <Rocket className="w-4 h-4 text-primary" />
+            <span>Training Objectives</span>
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4"
+          >
+            Skills That <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Drive Success</span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0"
+          >
+            Our training helps learners grow, apply, and succeed.
+          </motion.p>
+        </div>
 
-      {/* Content Grid */}
-      <div className="container mx-auto px-4 max-w-7xl relative">
+        {/* Content Grid */}
+        <div className="relative">
         
         <div className="flex flex-col lg:flex-row items-stretch justify-between gap-8 lg:gap-4 relative z-10">
           
@@ -211,6 +214,7 @@ export function TrainingObjectives() {
           </div>
         </motion.div>
 
+        </div>
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ export function FinalCTA() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/4 z-0 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 w-[800px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" />
 
-      <div className="container relative mx-auto px-4 md:px-6 z-10">
+      <div className="mx-auto max-w-[1200px] w-full relative px-4 md:px-6 z-10">
         
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
@@ -36,7 +36,7 @@ export function FinalCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl md:text-5xl font-heading font-bold md:font-extrabold text-foreground mb-6 max-w-2xl leading-tight tracking-tight"
+              className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-6 max-w-2xl leading-tight tracking-tight"
             >
               Ready to Accelerate Your Career with <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">AI?</span>
             </motion.h2>

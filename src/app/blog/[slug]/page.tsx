@@ -25,7 +25,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         
         {/* Article Header */}
         <section className="relative pt-16 pb-12 md:pt-24 md:pb-16 bg-gradient-to-b from-primary/5 via-background to-background">
-          <div className="container mx-auto px-4 md:px-6 max-w-4xl relative z-10">
+          <div className="mx-auto max-w-[1200px] w-full px-4 md:px-6 relative z-10">
             <Link 
               href="/blog"
               className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8 group"
@@ -87,7 +87,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </section>
 
         {/* Featured Image */}
-        <section className="container mx-auto px-4 md:px-6 max-w-5xl mb-16">
+        <section className="mx-auto max-w-[1200px] w-full px-4 md:px-6 mb-16">
           <div className="relative w-full aspect-[21/9] md:aspect-[2.5/1] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
             {/* Ambient inner glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10 pointer-events-none" />
@@ -100,8 +100,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </section>
 
         {/* Article Body Placeholder */}
-        <section className="container mx-auto px-4 md:px-6 max-w-3xl pb-24">
-          <article className="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-none">
+        <section className="mx-auto max-w-[1200px] w-full px-4 md:px-6 pb-24">
+          <article className="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-3xl">
             <p className="lead text-xl text-muted-foreground font-medium mb-8">
               Welcome to this comprehensive guide on {article.title}. As AI continues to evolve at breakneck speeds, staying ahead of the curve requires continuous learning and practical application of new methodologies.
             </p>

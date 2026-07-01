@@ -55,16 +55,12 @@ export function CertificateShowcase() {
             transition={{ duration: 0.6 }}
             className="relative w-full aspect-[4/3] bg-card border-8 border-background shadow-2xl rounded-xl overflow-hidden rotate-2 hover:rotate-0 transition-transform duration-500"
           >
-            {/* Mock Certificate Visual */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple-500/5 flex flex-col items-center justify-center p-8 text-center border-2 border-primary/20 m-2 rounded-lg">
-              <Award className="w-16 h-16 text-amber-500 mb-4 opacity-50" />
-              <div className="text-2xl font-serif text-foreground/80 mb-2">Certificate of Completion</div>
-              <div className="w-20 h-0.5 bg-primary/20 mb-4" />
-              <div className="text-sm text-muted-foreground">This certifies that</div>
-              <div className="text-xl font-bold font-heading text-foreground mt-2 mb-4">Student Name</div>
-              <div className="text-sm text-muted-foreground">has successfully completed</div>
-              <div className="text-lg font-bold text-primary mt-2">AI Masterclass Program</div>
-            </div>
+            <Image 
+              src="/Assets/images/certificate.png" 
+              alt="Course Certificate" 
+              fill 
+              className="object-cover hover:scale-105 transition-transform duration-500"
+            />
           </motion.div>
 
         </div>

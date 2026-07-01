@@ -132,9 +132,9 @@ export function HexagonFeatures() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-lg md:text-xl mt-6 max-w-2xl mx-auto"
+            className="text-muted-foreground text-base md:text-xl mt-6 max-w-2xl mx-auto"
           >
-            Our core philosophy is built around empowering learners with practical, industry-ready skills. Hover over the tiles to reveal our approach.
+            Hover to discover what sets AI Abhyas apart.
           </motion.p>
         </div>
 

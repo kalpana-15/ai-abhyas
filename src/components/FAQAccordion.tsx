@@ -1,20 +1,24 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { FAQ } from "@/types";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { motion } from "framer-motion";
-import { Users, Code, Target, Edit3, Layers, Monitor, HelpCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Users, Code, Target, Edit3, Layers, Monitor, HelpCircle, ArrowRight } from "lucide-react";
 
 interface FAQAccordionProps {
   faqs: FAQ[];
 }
 
 export function FAQAccordion({ faqs }: FAQAccordionProps) {
+  // Use exactly 5 questions
+  const displayFaqs = faqs.slice(0, 5);
+  const [activeId, setActiveId] = useState<string>("");
+
+  // Collapse all when category changes
+  useEffect(() => {
+    setActiveId("");
+  }, [faqs]);
+
   const getIconForQuestion = (question: string) => {
     const q = question.toLowerCase();
     if (q.includes("join") || q.includes("who")) return Users;
@@ -32,32 +36,65 @@ export function FAQAccordion({ faqs }: FAQAccordionProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="w-full mx-auto"
+      className="w-full mx-auto flex flex-col gap-4"
     >
-      <Accordion className="w-full flex flex-col gap-4">
-        {faqs.map((faq, index) => {
+      <div className="flex flex-col gap-3">
+        {displayFaqs.map((faq) => {
           const Icon = getIconForQuestion(faq.question);
+          const isActive = faq.id === activeId;
+          
           return (
-              <AccordionItem 
+            <div 
               key={faq.id} 
-              value={`item-${index}`} 
-              className="border border-border/60 rounded-2xl bg-card px-6 sm:px-8 py-2 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+              className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
+                isActive 
+                  ? "border-primary bg-primary/5 shadow-md shadow-primary/5" 
+                  : "border-border/60 bg-card hover:border-border"
+              }`}
             >
-              <AccordionTrigger className="text-left font-heading font-semibold text-[15px] md:text-[17px] hover:text-primary hover:no-underline transition-colors py-4 [&>svg]:text-primary [&>svg]:w-5 [&>svg]:h-5 group">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 transition-colors group-hover:bg-primary/20">
-                    <Icon className="w-5 h-5 text-primary" />
+              <button
+                onClick={() => setActiveId(isActive ? "" : faq.id)}
+                className="w-full flex items-center justify-between text-left px-6 py-4 transition-colors"
+              >
+                <div className="flex items-center gap-4 pr-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                    isActive ? "bg-primary text-white shadow-sm" : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                  }`}>
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <span>{faq.question}</span>
+                  <span className={`font-heading font-semibold text-[15px] md:text-[16px] leading-tight ${
+                    isActive ? "text-primary" : "text-foreground hover:text-primary transition-colors"
+                  }`}>
+                    {faq.question}
+                  </span>
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-4 pt-4 border-t border-border mt-1">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
+                <div className={`shrink-0 transition-transform duration-300 ${isActive ? "rotate-90 text-primary" : "text-muted-foreground"}`}>
+                  <ArrowRight className="w-5 h-5 opacity-70" />
+                </div>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isActive && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <div className="px-6 pb-5 pt-1 pl-[72px]">
+                      <div className="border-l-2 border-primary/20 pl-4">
+                        <p className="text-muted-foreground text-[15px] leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           );
         })}
-      </Accordion>
+      </div>
     </motion.div>
   );
 }

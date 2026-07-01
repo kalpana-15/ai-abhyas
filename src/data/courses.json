@@ -18,8 +18,8 @@
     "language": "English",
     "totalRatings": "4.2k",
     "isPremium": true,
-    "promoText": "Access 28,000+ top-rated courses with AI Abhyas Personal Plan.",
-    "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Master Large Language Models and build real-world enterprise applications.",
+    "image": "/Assets/images/ai masterclase.png",
     "curriculum": [
       { "id": 1, "title": "Introduction to GenAI", "hours": 4, "lessons": 10, "resources": 3 },
       { "id": 2, "title": "Understanding LLMs & Transformers", "hours": 8, "lessons": 15, "resources": 5 },
@@ -59,7 +59,8 @@
     "students": "45.2k",
     "rating": 4.8,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Master the core concepts of AI and machine learning without writing a single line of code.",
+    "image": "/Assets/images/ai for everyone.png",
     "curriculum": [
       { "id": 1, "title": "What is AI?", "hours": 2, "lessons": 5, "resources": 1 },
       { "id": 2, "title": "Everyday AI Tools", "hours": 3, "lessons": 8, "resources": 2 },
@@ -97,7 +98,8 @@
     "students": "8.1k",
     "rating": 4.7,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Learn the math and programming behind traditional machine learning algorithms.",
+    "image": "/Assets/images/machine learning engneering.png",
     "curriculum": [
       { "id": 1, "title": "Python Refresher & Pandas", "hours": 6, "lessons": 12, "resources": 4 },
       { "id": 2, "title": "Supervised Learning", "hours": 10, "lessons": 15, "resources": 5 },
@@ -136,7 +138,8 @@
     "students": "1.2k",
     "rating": 4.9,
     "certificateIncluded": false,
-    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Build autonomous AI agents that can perform complex workflows and interact with APIs.",
+    "image": "/Assets/images/ai agents.png",
     "curriculum": [
       { "id": 1, "title": "Intro to Autonomous Agents", "hours": 4, "lessons": 8, "resources": 2 },
       { "id": 2, "title": "Tool Calling & APIs", "hours": 6, "lessons": 12, "resources": 4 },
@@ -174,7 +177,8 @@
     "students": "3.5k",
     "rating": 4.8,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Get a strategic framework for implementing AI in your organization and measuring ROI.",
+    "image": "/Assets/images/ai for businessman.png",
     "curriculum": [
       { "id": 1, "title": "AI Landscape & Terminology", "hours": 3, "lessons": 6, "resources": 2 },
       { "id": 2, "title": "Identifying AI Use Cases", "hours": 4, "lessons": 8, "resources": 3 },
@@ -212,7 +216,8 @@
     "students": "5.6k",
     "rating": 4.9,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Build state-of-the-art vision models for object detection and image segmentation.",
+    "image": "/Assets/images/computer vision misionary.png",
     "curriculum": [
       { "id": 1, "title": "Intro to Computer Vision", "hours": 4, "lessons": 10, "resources": 2 },
       { "id": 2, "title": "CNNs Architecture", "hours": 8, "lessons": 14, "resources": 4 },
@@ -251,7 +256,8 @@
     "students": "22.1k",
     "rating": 4.7,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Master advanced prompting techniques to maximize the capabilities of AI models.",
+    "image": "/Assets/images/prompt engineering.png",
     "curriculum": [
       { "id": 1, "title": "The Anatomy of a Prompt", "hours": 2, "lessons": 5, "resources": 3 },
       { "id": 2, "title": "Zero-Shot vs Few-Shot", "hours": 3, "lessons": 6, "resources": 2 },
@@ -288,7 +294,8 @@
     "students": "2.8k",
     "rating": 4.9,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Explore how artificial intelligence is revolutionizing diagnostics and patient care.",
+    "image": "/Assets/images/ai in healthcare copy.png",
     "curriculum": [
       { "id": 1, "title": "AI Basics for Medicine", "hours": 4, "lessons": 8, "resources": 2 },
       { "id": 2, "title": "Predictive Analytics in Care", "hours": 6, "lessons": 10, "resources": 4 },
@@ -326,7 +333,8 @@
     "students": "4.3k",
     "rating": 4.8,
     "certificateIncluded": true,
-    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Learn the complete evolution of NLP and build your own text analysis pipelines.",
+    "image": "/Assets/images/NLP.jpeg",
     "curriculum": [
       { "id": 1, "title": "Text Preprocessing & Regex", "hours": 4, "lessons": 10, "resources": 2 },
       { "id": 2, "title": "Word Embeddings", "hours": 6, "lessons": 12, "resources": 3 },
@@ -364,7 +372,8 @@
     "students": "15.7k",
     "rating": 4.6,
     "certificateIncluded": false,
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    "promoText": "Launch your own AI-powered web applications in minutes using modern no-code platforms.",
+    "image": "/Assets/images/no code ai app building.png",
     "curriculum": [
       { "id": 1, "title": "No-Code Ecosystem", "hours": 2, "lessons": 5, "resources": 2 },
       { "id": 2, "title": "API Basics for Non-Coders", "hours": 4, "lessons": 8, "resources": 3 },

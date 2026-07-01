@@ -87,7 +87,7 @@ export function Testimonials() {
     <section className="relative overflow-hidden bg-muted/30 border-y border-border py-24 transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className={`mx-auto max-w-4xl flex flex-col items-center mb-16 text-center transition-all duration-700 ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
           <div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm mb-6 border border-primary/20 shadow-[0_0_15px_rgba(var(--primary),0.2)]"
@@ -95,7 +95,7 @@ export function Testimonials() {
             <Star className="w-4 h-4" />
             <span className="tracking-wide">Student Feedback</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-heading font-bold md:font-extrabold mb-6 tracking-tight text-foreground">
+          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6 tracking-tight text-foreground">
             What Our <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">Students Say</span>
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">

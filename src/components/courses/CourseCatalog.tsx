@@ -204,7 +204,7 @@ export function CourseCatalog() {
 
   return (
     <section className="pt-6 pb-12 md:pt-10 md:pb-20 bg-background relative" id="course-catalog">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="mx-auto max-w-[1200px] w-full px-4 md:px-6">
         
         {/* Top Search Bar (Spans full width) */}
         <div className="w-full flex items-center gap-4 pb-8 mb-8 border-b border-border/80">
@@ -218,31 +218,31 @@ export function CourseCatalog() {
               className="w-full h-12 pl-12 pr-4 rounded-xl border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow"
             />
           </div>
-          {/* Mobile Filter Toggle Button */}
+          {/* Filter Toggle Button (Now visible on all screens) */}
           <button
             onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
-            className="lg:hidden h-12 px-4 rounded-xl border border-border bg-card flex items-center gap-2 hover:bg-muted"
+            className="h-12 px-4 rounded-xl border border-border bg-card flex items-center gap-2 hover:bg-muted shrink-0"
           >
             <SlidersHorizontal className="w-5 h-5" />
-            <span className="font-medium">Filters {activeFiltersCount > 0 && `(${activeFiltersCount})`}</span>
+            <span className="font-medium hidden sm:inline">Filters {activeFiltersCount > 0 && `(${activeFiltersCount})`}</span>
+            <span className="font-medium sm:hidden">{activeFiltersCount > 0 ? activeFiltersCount : ''}</span>
           </button>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-start relative">
 
-          {/* Mobile Backdrop */}
+          {/* Global Backdrop */}
           {isMobileFiltersOpen && (
             <div 
-              className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm transition-opacity"
+              className="fixed inset-0 top-16 md:top-[72px] xl:top-20 bg-black/60 z-30 backdrop-blur-sm transition-opacity"
               onClick={() => setIsMobileFiltersOpen(false)}
             />
           )}
 
-          {/* Sidebar (Filters) */}
+          {/* Sidebar (Filters) - Now a drawer on all screens */}
           <aside className={`
-            fixed inset-y-0 left-0 z-50 w-[85vw] max-w-[320px] bg-background shadow-2xl p-6 overflow-y-auto transition-transform duration-300 ease-in-out flex flex-col space-y-8
+            fixed top-16 md:top-[72px] xl:top-20 bottom-0 left-0 z-40 w-[85vw] max-w-[320px] bg-background shadow-2xl p-6 overflow-y-auto transition-transform duration-300 ease-in-out flex flex-col space-y-8
             ${isMobileFiltersOpen ? 'translate-x-0' : '-translate-x-full'}
-            lg:static lg:translate-x-0 lg:w-[250px] lg:p-4 lg:shadow-sm lg:z-20 lg:block lg:shrink-0 lg:h-[calc(100vh-8rem)] lg:sticky lg:top-24 lg:bg-card lg:border lg:border-border lg:rounded-2xl
             [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
           `}>
             
@@ -259,7 +259,7 @@ export function CourseCatalog() {
                     Clear All
                   </button>
                 )}
-                <button onClick={() => setIsMobileFiltersOpen(false)} className="lg:hidden p-1.5 text-muted-foreground hover:text-foreground bg-muted/50 rounded-full transition-colors">
+                <button onClick={() => setIsMobileFiltersOpen(false)} className="p-1.5 text-muted-foreground hover:text-foreground bg-muted/50 rounded-full transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -382,7 +382,7 @@ export function CourseCatalog() {
 
             {/* Grid Area */}
             {filteredCourses.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredCourses.map(course => (
                   <CourseCard key={course.id} course={course} />
                 ))}

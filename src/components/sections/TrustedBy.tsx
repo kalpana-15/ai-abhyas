@@ -72,9 +72,9 @@ export function TrustedBy() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-heading font-extrabold mb-6 tracking-tight text-foreground"
+            className="text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight text-foreground"
           >
-            {header.titlePart1}<br className="hidden md:block" />
+            {header.titlePart1}
             <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70"> {header.titleHighlight}</span>
           </motion.h2>
           
@@ -101,7 +101,7 @@ export function TrustedBy() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * index }}
-                className="bg-card border border-border/50 hover:border-primary/50 shadow-lg hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-3 rounded-3xl overflow-hidden flex flex-col items-center relative group transition-all duration-300"
+                className="bg-card border-2 border-primary/20 hover:border-primary/50 shadow-lg hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-3 rounded-[36px] overflow-hidden flex flex-col items-center relative group transition-all duration-300"
               >
                 <div className="relative w-full h-40 md:h-48 overflow-hidden">
                   <Image 
@@ -119,13 +119,14 @@ export function TrustedBy() {
                 )}
                 
                 <div className="pt-10 pb-6 px-4 md:px-5 text-center flex-grow flex flex-col w-full relative z-20">
-                  <h3 className="text-lg md:text-xl font-bold mb-2 font-heading">
+                  <h3 className="text-base md:text-lg font-bold mb-2 font-heading whitespace-nowrap truncate w-full px-2">
                     {card.titlePrefix} <span className="text-primary">{card.titleHighlight}</span>
                   </h3>
                   <p className="text-muted-foreground text-xs md:text-sm mb-6 leading-relaxed">
                     {card.description}
                   </p>
                   
+                  {/* 
                   <div className="grid grid-cols-3 gap-1 md:gap-2 mt-auto border-t border-border/50 pt-5">
                     {card.stats.map((stat, i) => {
                       const StatIcon = iconMap[stat.icon];
@@ -147,6 +148,7 @@ export function TrustedBy() {
                       );
                     })}
                   </div>
+                  */}
                 </div>
               </motion.div>
             );

@@ -29,12 +29,12 @@ export default function AboutPage() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
               
               {/* Left Side: Content */}
-              <div className="flex flex-col items-start text-left">
+              <div className="flex flex-col items-center text-center lg:items-start lg:text-left relative z-10 gap-6 max-w-2xl lg:pl-[31px] pt-8 lg:pt-0 lg:-mt-8 order-2 lg:order-1">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm border border-primary/20 shadow-sm"
                 >
                   <GraduationCap className="w-4 h-4 text-primary" />
                   <span>About AI Abhyas</span>
@@ -44,16 +44,17 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 max-w-2xl leading-tight text-foreground"
+                  className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold tracking-tight text-foreground drop-shadow-sm leading-tight max-w-4xl"
                 >
-                  Empowering Learners with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Practical AI</span>
+                  Learn & Master <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">Practical AI</span>
                 </motion.h1>
 
                 <motion.p 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-lg md:text-xl text-muted-foreground mb-10 max-w-xl"
+                  className="text-lg md:text-xl text-muted-foreground max-w-xl"
                 >
                   AI Abhyas is dedicated to making AI education accessible, practical, and industry-focused through expert-led training, real-world projects, and continuous learning.
                 </motion.p>
@@ -82,7 +83,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square max-w-lg mx-auto lg:mx-0 lg:ml-auto flex items-center justify-center"
+                className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square max-w-lg mx-auto lg:mx-0 lg:ml-auto flex items-center justify-center order-1 lg:order-2"
               >
                  <img 
                    src="/Assets/animations/about us.svg" 
