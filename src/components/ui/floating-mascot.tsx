@@ -135,6 +135,7 @@ export function FloatingMascot() {
             fill
             className="object-contain"
             priority
+            unoptimized={true}
           />
         </div>
         
