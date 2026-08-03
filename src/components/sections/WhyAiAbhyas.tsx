@@ -63,42 +63,42 @@ const cards = [
   },
 ];
 
+const Card = ({ card, heightClass, delay }: { card: typeof cards[0], heightClass: string, delay: number }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay }}
+    className={`relative rounded-[2rem] overflow-hidden group ${heightClass}`}
+  >
+     <img src={card.image} alt={card.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+     
+     {/* Background Overlays */}
+     <div className="absolute inset-0 bg-black/30 transition-colors duration-500 group-hover:bg-black/60 z-0" />
+     <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-500 group-hover:opacity-0 z-0" />
+     
+     {/* Default State (Icon and Heading) */}
+     <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end text-white transition-opacity duration-500 group-hover:opacity-0 z-10">
+        <div className="flex items-center gap-2 overflow-hidden">
+          <card.icon className="w-5 h-5 text-primary shrink-0" />
+          <h3 className="text-[11px] md:text-[12px] font-heading font-bold leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] whitespace-nowrap truncate">{card.title}</h3>
+        </div>
+     </div>
+
+     {/* Hover State (Heading, Description, Button) sliding from right */}
+     <div className="absolute inset-0 bg-primary/95 p-4 md:p-5 flex flex-col text-primary-foreground transform translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] z-10">
+        <h3 className="text-[13px] md:text-[14px] font-heading font-bold mb-2 leading-tight whitespace-nowrap truncate">{card.title}</h3>
+        <p className="text-[11px] md:text-xs opacity-90 mb-auto leading-relaxed overflow-hidden">{card.description}</p>
+        <Link href={card.link} className="mt-auto">
+          <button className="bg-background text-foreground px-3 py-2 rounded-lg text-[10px] md:text-[11px] font-semibold hover:bg-muted transition-colors shadow-sm w-full whitespace-nowrap truncate text-center">
+            {card.buttonText}
+          </button>
+        </Link>
+     </div>
+  </motion.div>
+);
+
 export function WhyAiAbhyas() {
-  const Card = ({ card, heightClass, delay }: { card: typeof cards[0], heightClass: string, delay: number }) => (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className={`relative rounded-[2rem] overflow-hidden group ${heightClass}`}
-    >
-       <img src={card.image} alt={card.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-       
-       {/* Background Overlays */}
-       <div className="absolute inset-0 bg-black/30 transition-colors duration-500 group-hover:bg-black/60 z-0" />
-       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-500 group-hover:opacity-0 z-0" />
-       
-       {/* Default State (Icon and Heading) */}
-       <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end text-white transition-opacity duration-500 group-hover:opacity-0 z-10">
-          <div className="flex items-center gap-2 overflow-hidden">
-            <card.icon className="w-5 h-5 text-primary shrink-0" />
-            <h3 className="text-[11px] md:text-[12px] font-heading font-bold leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] whitespace-nowrap truncate">{card.title}</h3>
-          </div>
-       </div>
-
-       {/* Hover State (Heading, Description, Button) sliding from right */}
-       <div className="absolute inset-0 bg-primary/95 p-4 md:p-5 flex flex-col text-primary-foreground transform translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] z-10">
-          <h3 className="text-[13px] md:text-[14px] font-heading font-bold mb-2 leading-tight whitespace-nowrap truncate">{card.title}</h3>
-          <p className="text-[11px] md:text-xs opacity-90 mb-auto leading-relaxed overflow-hidden">{card.description}</p>
-          <Link href={card.link} className="mt-auto">
-            <button className="bg-background text-foreground px-3 py-2 rounded-lg text-[10px] md:text-[11px] font-semibold hover:bg-muted transition-colors shadow-sm w-full whitespace-nowrap truncate text-center">
-              {card.buttonText}
-            </button>
-          </Link>
-       </div>
-    </motion.div>
-  );
-
   return (
     <section className="py-16 md:py-24 relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-7xl">

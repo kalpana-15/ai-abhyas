@@ -128,7 +128,7 @@ export function CourseCatalog() {
 
   // Filter & Sort Logic
   const filteredCourses = useMemo(() => {
-    let filtered = coursesData.filter(course => {
+    const filtered = coursesData.filter(course => {
       // 1. Search Query
       if (searchQuery) {
         const query = searchQuery.toLowerCase();

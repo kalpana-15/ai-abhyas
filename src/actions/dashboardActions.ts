@@ -37,7 +37,7 @@ export async function getDashboardOverviewData() {
     submissions.forEach(s => activeDatesSet.add(new Date(s.submittedAt).toDateString()));
     
     let currentStreak = 0;
-    let checkDate = new Date();
+    const checkDate = new Date();
     while (true) {
       if (activeDatesSet.has(checkDate.toDateString())) {
         currentStreak++;

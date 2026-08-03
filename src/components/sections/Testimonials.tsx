@@ -181,7 +181,10 @@ export function Testimonials() {
                       const diff = (i - 2 + testimonials.length) % testimonials.length
                       const forward = diff <= testimonials.length / 2
                       const steps = forward ? diff : testimonials.length - diff
-                      for (let s = 0; s < steps; s++) forward ? rotateForward() : rotateBackward()
+                      for (let s = 0; s < steps; s++) {
+                        if (forward) rotateForward();
+                        else rotateBackward();
+                      }
                     }}
                     className={`h-2 rounded-full transition-all duration-500 ${
                       i === 2

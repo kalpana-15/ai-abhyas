@@ -32,7 +32,7 @@ export default function PaymentsPage() {
       try {
         setLoading(true);
         const res = await getBillingHistory();
-        let list: any[] = res && res.success && res.payments ? res.payments : [];
+        const list: any[] = res && res.success && res.payments ? res.payments : [];
 
         // Strictly filter or generate invoices ONLY for courses actively enrolled or purchased by user
         const activeCourseTitles = coursesData
