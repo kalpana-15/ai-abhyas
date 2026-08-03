@@ -63,9 +63,11 @@ export function FinalCTA() {
                   Explore Courses <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="h-14 px-8 text-base w-full sm:w-auto">
-                Talk to an Advisor
-              </Button>
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="h-14 px-8 text-base w-full">
+                  Talk to an Advisor
+                </Button>
+              </Link>
             </motion.div>
           </div>
 

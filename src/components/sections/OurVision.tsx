@@ -163,11 +163,11 @@ export const OurVision = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-50" />
                     <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
-                    <div className={`flex items-center gap-3 md:gap-4 w-[160px] md:w-[190px] mx-auto h-full text-white relative z-10 ${slice.contentClass || ''}`}>
+                    <div className={`flex items-center gap-3 md:gap-4 w-[160px] md:w-[190px] mx-auto h-full text-white relative z-10 ${(slice as any).contentClass || ''}`}>
                       <div className="shrink-0 flex items-center justify-center">
                         <Icon className="w-7 h-7 md:w-8 md:h-8 opacity-95 drop-shadow-md" strokeWidth={2} />
                       </div>
-                      <div className={`flex flex-col justify-center ${slice.titleClass || ''}`}>
+                      <div className={`flex flex-col justify-center ${(slice as any).titleClass || ''}`}>
                         <h3 className="font-extrabold text-[9px] md:text-[11px] tracking-wide drop-shadow-md whitespace-nowrap">{slice.title}</h3>
                       </div>
                     </div>

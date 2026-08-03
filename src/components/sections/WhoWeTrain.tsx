@@ -146,7 +146,7 @@ export function WhoWeTrain() {
                           transition={{ delay: 0.2 }}
                           className="text-white/80 mt-3 text-xs md:text-base leading-relaxed"
                         >
-                          {audience.shortDesc}
+                          {(audience as any).shortDesc || audience.description}
                         </motion.p>
                       </motion.div>
                     )}

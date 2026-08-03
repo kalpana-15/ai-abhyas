@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { NavLink } from "./NavLink";
 import { CTAButtons } from "./CTAButtons";
 import { MobileMenu } from "./MobileMenu";
+import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
 const desktopNavLinks = [
@@ -55,11 +56,7 @@ export function Navbar() {
           <div className="flex items-center gap-16 lg:gap-24 xl:gap-32">
             {/* Logo (Left) */}
           <Link href="/" className="flex items-center group shrink-0">
-            <img 
-              src="/Assets/logoo.png" 
-              alt="AI Abhyas Logo" 
-              className="h-10 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform"
-            />
+            <Logo className="h-7 md:h-8" />
           </Link>
 
           {/* Desktop Nav */}

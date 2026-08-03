@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import { Terminal, Database, Cloud, Blocks, Box, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function ToolsGrid({ tools }: { tools: string[] }) {
+export function ToolsGrid({ tools = [] }: { tools?: string[] }) {
   // A helper array of nice tech icons
   const icons = [Terminal, Database, Cloud, Blocks, Box, Code2];
 
   // We'll limit tools to 8 just so the circle doesn't get ridiculously crowded, 
   // but usually there are 4-6 tools per course.
-  const displayTools = tools.slice(0, 8);
+  const displayTools = (tools || []).slice(0, 8);
   const radius = 180; // Increased radius for wider scatter
 
   return (

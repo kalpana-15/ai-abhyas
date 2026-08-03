@@ -67,10 +67,10 @@ export default async function CourseDetailsPage({ params }: { params: Promise<{ 
                 <SkillsYouWillGain skills={course.skills} />
               </div>
 
-            <ToolsGrid tools={course.tools} />
-            <Curriculum curriculum={course.curriculum} />
+            <ToolsGrid tools={course.tools || []} />
+            <Curriculum curriculum={course.curriculum || []} />
             <LearningResources />
-            <ProjectsShowcase projects={course.projects} />
+            <ProjectsShowcase projects={course.projects || []} />
             <WhoShouldEnroll />
             <LearningJourney />
             <InstructorProfile instructor={course.instructor} />

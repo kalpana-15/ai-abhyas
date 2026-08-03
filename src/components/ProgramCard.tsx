@@ -44,7 +44,7 @@ export function ProgramCard({ course, index }: ProgramCardProps) {
             {course.description}
           </p>
           <div className="flex flex-wrap gap-2 mb-4">
-            {course.tags.map((tag) => (
+            {course.tags?.map((tag) => (
               <Badge key={tag} variant="outline" className="text-xs">
                 {tag}
               </Badge>

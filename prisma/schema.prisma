@@ -1,0 +1,239 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                   String                  @id @default(cuid())
+  name                 String
+  email                String                  @unique
+  passwordHash         String
+  role                 String                  @default("Student")
+  avatar               String?
+  phone                String?
+  bio                  String?                 @db.Text
+  organization         String?
+  githubUrl            String?
+  linkedinUrl          String?
+  preferences          Json?                   @default("{}")
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @updatedAt
+  enrollments          Enrollment[]
+  reviews              Review[]
+  payments             Payment[]
+  lessonProgress       LessonProgress[]
+  assignmentSubmits    AssignmentSubmission[]
+  assessmentAttempts   AssessmentAttempt[]
+  certificates         CredentialCertificate[]
+  chatMemories         AIChatMemory[]
+  supportTickets       SupportTicket[]
+}
+
+model Payment {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId    String
+  courseTitle String
+  amount      String
+  method      String   @default("Credit Card")
+  status      String   @default("Paid")
+  createdAt   DateTime @default(now())
+}
+
+model Enrollment {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId   String
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  status     String   @default("Active")
+  enrolledAt DateTime @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  message     String
+  submittedAt DateTime @default(now())
+  status      String   @default("Unread")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId  String
+  rating    Int
+  comment   String?
+  postedAt  DateTime @default(now())
+}
+
+model Course {
+  id               String                  @id
+  title            String
+  description      String?                 @db.Text
+  level            String                  @default("Beginner")
+  mode             String                  @default("Online")
+  status           String                  @default("Open")
+  duration         String?
+  fee              String                  @default("Free")
+  eligibility      String?
+  skills           String[]                @default([])
+  highlights       String[]                @default([])
+  students         String?
+  rating           Float                   @default(4.8)
+  image            String?
+  instructorName   String?
+  instructorTitle  String?
+  instructorBio    String?                 @db.Text
+  instructorImage  String?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+
+  modules          Module[]
+  resources        CourseResource[]
+  enrollments      Enrollment[]
+  assignments      AssignmentSubmission[]
+  assessments      AssessmentAttempt[]
+  certificates     CredentialCertificate[]
+  liveSessions     LiveSession[]
+}
+
+model Module {
+  id          String   @id @default(cuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  hours       Int      @default(2)
+  orderIndex  Int      @default(0)
+  lessons     Lesson[]
+  createdAt   DateTime @default(now())
+}
+
+model Lesson {
+  id          String           @id @default(cuid())
+  moduleId    String
+  module      Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  title       String
+  duration    String           @default("25 mins")
+  type        String           @default("Video")
+  videoUrl    String?          @default("https://www.w3schools.com/html/mov_bbb.mp4")
+  orderIndex  Int              @default(0)
+  progress    LessonProgress[]
+  createdAt   DateTime         @default(now())
+}
+
+model CourseResource {
+  id          String   @id @default(cuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  moduleTitle String   @default("Module 1")
+  title       String
+  type        String   @default("pdf")
+  size        String   @default("1.2 MB")
+  filename    String   @default("resource.pdf")
+  url         String?  @default("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
+  createdAt   DateTime @default(now())
+}
+
+model LessonProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  isCompleted Boolean  @default(false)
+  completedAt DateTime @default(now())
+
+  @@unique([userId, lessonId])
+}
+
+model AssignmentSubmission {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  fileUrl     String
+  status      String   @default("Pending") // Pending or Graded
+  score       Int?
+  feedback    String?  @db.Text
+  submittedAt DateTime @default(now())
+}
+
+model AssessmentAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  quizTitle   String
+  score       Int      @default(0)
+  total       Int      @default(100)
+  threshold   Int      @default(70)
+  status      String   @default("passed")
+  attemptedAt DateTime @default(now())
+}
+
+model CredentialCertificate {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId     String
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  credentialId String   @unique
+  isUnlocked   Boolean  @default(true)
+  issuedAt     DateTime @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model AIChatMemory {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId  String
+  messages  Json     @default("[]")
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, courseId])
+}
+
+model LiveSession {
+  id            String   @id @default(cuid())
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title         String
+  description   String?  @db.Text
+  instructor    String   @default("Dr. Sarah Chen")
+  scheduledAt   DateTime @default(now())
+  duration      String   @default("60 mins")
+  meetingUrl    String   @default("https://meet.google.com/abc-demo-xyz")
+  status        String   @default("Upcoming") // Upcoming, Live Now, Recorded
+  recordingUrl  String?  @default("https://www.w3schools.com/html/mov_bbb.mp4")
+  attendeeCount Int      @default(45)
+  createdAt     DateTime @default(now())
+}
+
+model SupportTicket {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject     String
+  category    String   @default("Technical Support")
+  status      String   @default("Open") // Open, In Progress, Resolved
+  messages    Json     @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

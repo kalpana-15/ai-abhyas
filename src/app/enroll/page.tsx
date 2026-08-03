@@ -2,243 +2,677 @@
 
 import React, { Suspense, useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { CheckCircle2, CreditCard, ShieldCheck, PlayCircle, Clock, BookOpen, Lock } from "lucide-react";
-import Link from "next/link";
+import Script from "next/script";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ShieldCheck, 
+  ChevronRight, 
+  Lock, 
+  Home, 
+  ShoppingBag, 
+  X, 
+  Sparkles, 
+  ArrowUp, 
+  AlertCircle, 
+  CheckCircle2 
+} from "lucide-react";
 
-function EnrollContent() {
+import { useAuth } from "@/context/AuthContext";
+import { createRazorpayOrder, verifyRazorpayPayment } from "@/actions/paymentActions";
+import coursesData from "@/data/courses.json";
+
+// Layout import
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+
+// Modular Enrollment components
+import { EnrollmentStepper } from "@/components/enrollment/EnrollmentStepper";
+import { StudentInfoSection, StudentFormData } from "@/components/enrollment/StudentInfoSection";
+import { BillingFormData } from "@/components/enrollment/BillingDetailsSection";
+import { AdditionalFormData } from "@/components/enrollment/AdditionalInfoSection";
+import { OrderSummaryCard } from "@/components/enrollment/OrderSummaryCard";
+import { PaymentCTAAndTrust } from "@/components/enrollment/PaymentCTAAndTrust";
+import { PaymentSuccessView, PaymentFailedView } from "@/components/enrollment/PaymentResultViews";
+
+function EnrollPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const courseParam = searchParams.get("course") || "Advanced AI Certification";
-  const typeParam = searchParams.get("type") || "paid"; // free or paid
+  const { user, loading, refreshSession, enroll } = useAuth();
 
+  const courseParam = searchParams.get("course") || "AI & Deep Learning Foundations Mastery";
+  const courseIdParam = searchParams.get("courseId") || "c6";
+  const typeParam = searchParams.get("type") || "paid";
   const isFree = typeParam === "free";
-  
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const matchedCourse = coursesData.find((c: any) => c.id === courseIdParam || c.title === courseParam);
+  const defaultFee = matchedCourse ? matchedCourse.fee : (isFree ? "Free" : "₹4,499");
+  const rawFeeParam = searchParams.get("fee") || defaultFee;
+  const baseFeeStr = (rawFeeParam.split("/")[0] || "").trim();
+  const rawBasePrice = parseInt(baseFeeStr.replace(/[^0-9]/g, ""), 10) || (isFree ? 0 : 4499);
+  const feeParam = isFree || rawBasePrice === 0 ? "Free" : `₹${rawBasePrice.toLocaleString()}`;
 
-  const handleCheckout = (e: React.FormEvent) => {
+  // Flow View States: "form" | "success" | "failed"
+  const [viewState, setViewState] = useState<"form" | "success" | "failed">("form");
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
+
+  // Inline Real Authentication Gateway States
+  const [authMode, setAuthMode] = useState<"signin" | "register">("signin");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authPassword, setAuthPassword] = useState("");
+  const [authName, setAuthName] = useState("");
+  const [authError, setAuthError] = useState("");
+  const [authSubmitting, setAuthSubmitting] = useState(false);
+
+  const handleInlineAuth = async (e: React.FormEvent) => {
     e.preventDefault();
+    setAuthError("");
+    setAuthSubmitting(true);
+
+    try {
+      const endpoint = authMode === "signin" ? "/api/auth/login" : "/api/auth/register";
+      const body = authMode === "signin"
+        ? { email: authEmail, password: authPassword }
+        : { name: authName || authEmail.split("@")[0], email: authEmail, password: authPassword };
+
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setAuthError(data.error || "Authentication failed. Please verify your credentials.");
+        setAuthSubmitting(false);
+        return;
+      }
+
+      // Immediately synchronize auth session from PostgreSQL across entire app
+      await refreshSession();
+      setAuthSubmitting(false);
+    } catch (err) {
+      setAuthError("Network communication error. Please verify your connection and try again.");
+      setAuthSubmitting(false);
+    }
+  };
+
+  // Success state details
+  const [successData, setSuccessData] = useState({
+    transactionId: "pay_" + Math.random().toString(36).substring(2, 10).toUpperCase(),
+    orderId: "order_" + Math.random().toString(36).substring(2, 10).toUpperCase(),
+    paymentMethod: "Razorpay (UPI / Cards / NetBanking)",
+    invoiceNumber: `INV-2026-${Math.floor(100000 + Math.random() * 900000)}`,
+  });
+
+  // Form State
+  const [studentForm, setStudentForm] = useState<StudentFormData>({
+    firstName: user?.name ? user.name.split(" ")[0] : "",
+    lastName: user?.name && user.name.includes(" ") ? user.name.split(" ").slice(1).join(" ") : "",
+    email: user?.email || "",
+    phone: "",
+    city: "",
+    college: "",
+    organization: "",
+    experienceLevel: "Intermediate (1-3 Yrs)",
+    occupation: "Software Engineer",
+    referralCode: "",
+    agreedToTerms: false,
+  });
+
+  const [billingForm, setBillingForm] = useState<BillingFormData>({
+    billingName: user?.name || "",
+    billingAddress: "",
+    country: "India",
+    state: "",
+    billingCity: "",
+    postalCode: "",
+    gstNumber: "",
+    invoiceName: "",
+  });
+
+  const [additionalForm, setAdditionalForm] = useState<AdditionalFormData>({
+    specialRequirements: "",
+    accessibilityRequirements: "",
+    instructorMessage: "",
+  });
+
+  const [errors, setErrors] = useState<Partial<Record<keyof StudentFormData, string>>>({});
+  const [appliedDiscount, setAppliedDiscount] = useState<number>(0);
+  const [appliedCode, setAppliedCode] = useState<string>("");
+  const calculatedPayable = Math.max(0, rawBasePrice - appliedDiscount);
+  const displayAmount = isFree || rawBasePrice === 0 ? "Free" : `₹${calculatedPayable.toLocaleString()}`;
+
+  // Populate user defaults once auth loads
+  useEffect(() => {
+    if (user && !studentForm.email) {
+      setStudentForm((prev) => ({
+        ...prev,
+        firstName: prev.firstName || user.name?.split(" ")[0] || "Learner",
+        lastName: prev.lastName || (user.name?.includes(" ") ? user.name.split(" ").slice(1).join(" ") : ""),
+        email: user.email || prev.email,
+      }));
+      setBillingForm((prev) => ({
+        ...prev,
+        billingName: prev.billingName || user.name || "Learner",
+      }));
+    }
+  }, [user]);
+
+  const handleStudentChange = (field: keyof StudentFormData, value: any) => {
+    setStudentForm((prev) => {
+      const next = { ...prev, [field]: value };
+      // Advance stepper to Step 2 (Review order) when user checks the certify box!
+      if (field === "agreedToTerms") {
+        if (value === true) {
+          setCurrentStep(2);
+        } else {
+          setCurrentStep(1);
+        }
+      }
+      return next;
+    });
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
+
+  const handleBillingChange = (field: keyof BillingFormData, value: any) => {
+    setBillingForm((prev) => ({ ...prev, [field]: value }));
+    if (currentStep < 2) setCurrentStep(2);
+  };
+
+  const handleAdditionalChange = (field: keyof AdditionalFormData, value: string) => {
+    setAdditionalForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCopyFromStudent = () => {
+    const fullName = `${studentForm.firstName} ${studentForm.lastName}`.trim();
+    setBillingForm((prev) => ({
+      ...prev,
+      billingName: fullName || prev.billingName,
+      billingCity: studentForm.city || prev.billingCity,
+    }));
+    alert("✅ Copied student name and city to billing details!");
+  };
+
+  // Validate required student info
+  const validateForm = (): boolean => {
+    const newErrors: Partial<Record<keyof StudentFormData, string>> = {};
+    if (!studentForm.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!studentForm.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!studentForm.email.trim() || !studentForm.email.includes("@")) newErrors.email = "Valid email address is required";
+    if (!studentForm.phone.trim() || studentForm.phone.length < 10) newErrors.phone = "Enter a valid 10-digit mobile phone";
+    if (!studentForm.agreedToTerms) newErrors.agreedToTerms = "You must agree to Terms of Service to proceed";
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      alert("Please complete all required fields and check the agreement certification box to proceed.");
+      // Smoothly scroll mobile users up to see the required fields or checkbox!
+      window.scrollTo({ top: 150, behavior: "smooth" });
+      return false;
+    }
+    return true;
+  };
+
+  // Primary Payment Launcher
+  const handleProceedToPayment = async () => {
+    setErrorMessage("");
+
+    if (!user) {
+      router.push(`/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+      return;
+    }
+
+    if (!validateForm()) return;
+
+    setCurrentStep(3);
     setIsProcessing(true);
-    // Simulate processing
-    setTimeout(() => {
+
+    try {
+      if (isFree || feeParam === "Free") {
+        await enroll(courseParam, false);
+        setTimeout(() => {
+          setIsProcessing(false);
+          setCurrentStep(4);
+          setViewState("success");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 1200);
+        return;
+      }
+
+      // Calculate discount-adjusted numerical fee string
+      const feeString = `₹${calculatedPayable}`;
+
+      const orderRes = await createRazorpayOrder({
+        amount: feeString,
+        courseId: courseIdParam,
+        courseTitle: courseParam,
+      });
+
+      if (!orderRes.success || !orderRes.orderId) {
+        setErrorMessage(orderRes.error || "Failed to initialize secure banking gateway order. Please check network connection.");
+        setIsProcessing(false);
+        setViewState("failed");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      if (!(window as any).Razorpay) {
+        setErrorMessage("Razorpay security check library failed to load. Please verify internet connection.");
+        setIsProcessing(false);
+        setViewState("failed");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_TJPNtcp72kpA5G",
+        amount: orderRes.amount,
+        currency: orderRes.currency || "INR",
+        name: "AI Abhyas Platform",
+        description: `Lifetime Enrollment: ${courseParam}`,
+        order_id: orderRes.orderId,
+        handler: async function (response: any) {
+          setIsProcessing(true);
+          const verifyRes = await verifyRazorpayPayment({
+            razorpayOrderId: response.razorpay_order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpaySignature: response.razorpay_signature,
+            courseId: courseIdParam,
+            courseTitle: courseParam,
+            amount: feeString,
+            method: "Razorpay Encrypted Gateway",
+          });
+
+          setIsProcessing(false);
+          if (verifyRes.success) {
+            await refreshSession();
+            setSuccessData({
+              transactionId: response.razorpay_payment_id || "pay_SUCCESS_VERIFIED",
+              orderId: response.razorpay_order_id || orderRes.orderId,
+              paymentMethod: "Razorpay (Level 1 PCI-DSS)",
+              invoiceNumber: `INV-2026-${Math.floor(100000 + Math.random() * 900000)}`,
+            });
+            setCurrentStep(4);
+            setViewState("success");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            setErrorMessage(verifyRes.error || "Security verification failed: Digital cryptographic transaction signature did not verify.");
+            setViewState("failed");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        },
+        prefill: {
+          name: `${studentForm.firstName} ${studentForm.lastName}`.trim() || user?.name || "Learner",
+          email: studentForm.email || user?.email || "student@aiabhyas.com",
+          contact: studentForm.phone || "9999999999",
+        },
+        notes: {
+          courseTitle: courseParam,
+          courseId: courseIdParam,
+          referral: appliedCode || studentForm.referralCode || "NONE",
+        },
+        theme: {
+          color: "#8B5CF6",
+          backdrop_color: "rgba(6,8,22,0.85)",
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+            if (currentStep === 3) setCurrentStep(2);
+          },
+        },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.on("payment.failed", function (resp: any) {
+        setIsProcessing(false);
+        setErrorMessage(`Transaction Declined: ${resp.error?.description || "Payment failed at banking gateway."}`);
+        setViewState("failed");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Launch Razorpay immediately to prevent iOS/Android mobile browsers from blocking the popup modal!
       setIsProcessing(false);
-      alert(isFree ? "Successfully Enrolled!" : "Payment Successful! You are now enrolled.");
-      router.push("/dashboard"); // Dummy redirect after success
-    }, 1500);
+      rzp.open();
+
+    } catch (err: any) {
+      setIsProcessing(false);
+      setErrorMessage("An unexpected network or session error occurred while launching secure payment.");
+      setViewState("failed");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-background relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-primary/20 blur-[120px]" />
-        <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] rounded-full bg-secondary/20 blur-[120px]" />
-      </div>
+    <div className="min-h-screen bg-[#FAFAF7] dark:bg-[#060816] text-[#111827] dark:text-[#F3F4F6] font-sans transition-colors duration-300 relative">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+      
+      {/* Top Navbar */}
+      <Navbar />
 
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          
-          <div className="mb-8 md:mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Complete your Enrollment</h1>
-            <p className="text-muted-foreground text-lg max-w-2xl">
-              You are one step away from joining {courseParam}. Secure your spot and start learning today.
+      {/* Branded Pre-payment Loading Overlay */}
+      <AnimatePresence>
+        {isProcessing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center"
+          >
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#8B5CF6] to-[#14B8A6] p-1 shadow-[0_0_50px_rgba(139,92,246,0.6)] flex items-center justify-center mb-6">
+              <div className="w-full h-full rounded-[20px] bg-[#14182F] flex items-center justify-center">
+                <div className="w-10 h-10 border-4 border-[#8B5CF6] border-t-transparent rounded-full animate-spin" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-black font-heading text-white mb-2">
+              Preparing Razorpay Secure Checkout...
+            </h3>
+            <p className="text-sm text-slate-300 max-w-md">
+              Establishing a Level-1 PCI DSS encrypted tunnel with your banking provider. Please do not refresh or close the page.
+            </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#14B8A6]/20 border border-[#14B8A6]/40 text-[#14B8A6] text-xs font-extrabold mt-6">
+              <ShieldCheck className="w-4 h-4" /> 256-bit SSL Banking Protection
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Container */}
+      <div className="max-w-[1420px] mx-auto px-4 sm:px-6 lg:px-12 pt-28 pb-32">
+
+        {/* Dynamic View State Render */}
+        {viewState === "success" ? (
+          <PaymentSuccessView
+            courseTitle={courseParam}
+            amountPaid={displayAmount}
+            transactionId={successData.transactionId}
+            orderId={successData.orderId}
+            paymentMethod={successData.paymentMethod}
+            invoiceNumber={successData.invoiceNumber}
+          />
+        ) : viewState === "failed" ? (
+          <PaymentFailedView
+            errorMessage={errorMessage}
+            onRetry={handleProceedToPayment}
+            onSelectOtherMethod={() => {
+              setViewState("form");
+              setCurrentStep(2);
+            }}
+            onGoBack={() => {
+              setViewState("form");
+              setCurrentStep(1);
+            }}
+          />
+        ) : loading ? (
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-12 h-12 border-4 border-[#8B5CF6] border-t-transparent rounded-full animate-spin mb-4 shadow-lg shadow-[#8B5CF6]/20" />
+            <p className="text-xs font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF]">
+              Verifying learner credentials...
             </p>
           </div>
-
-          <div className="flex flex-col lg:flex-row gap-8">
-            
-            {/* Left Column: Form & Payment */}
-            <div className="flex-1 space-y-6">
-              
-              <div className="bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                  <UserIcon className="w-5 h-5 text-primary" />
-                  Personal Information
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">First Name</label>
-                    <input type="text" defaultValue="John" className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Last Name</label>
-                    <input type="text" defaultValue="Doe" className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50" />
-                  </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="text-sm font-medium">Email Address</label>
-                    <input type="email" defaultValue="you@example.com" disabled className="w-full px-4 py-2.5 rounded-xl border border-border bg-muted/50 text-muted-foreground focus:outline-none" />
-                    <p className="text-xs text-muted-foreground">To change your email, please go to your account settings.</p>
-                  </div>
-                </div>
+        ) : !user ? (
+          /* INLINE REAL AUTHENTICATION GATEWAY FOR UNENROLLED / UNAUTHENTICATED LEARNERS */
+          <div className="max-w-xl mx-auto my-8 bg-white dark:bg-[#14182F] rounded-3xl border border-[#E7E5F4] dark:border-white/[0.08] shadow-2xl overflow-hidden p-6 sm:p-10">
+            <div className="text-center space-y-3.5 mb-8">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-xs font-bold text-[#8B5CF6] uppercase tracking-wider mx-auto">
+                <Lock className="w-3.5 h-3.5" /> Secure Learner Authentication
               </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-[#111827] dark:text-white tracking-tight">
+                Sign In or Register to Enroll
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6B7280] dark:text-[#9CA3AF] leading-relaxed max-w-md mx-auto">
+                Authenticate your real learner account to secure your enrollment in <strong className="text-[#111827] dark:text-white font-bold">{courseParam}</strong> and provision your AI engineering workspace.
+              </p>
+            </div>
 
-              {!isFree && (
-                <div className="bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl p-6 md:p-8 shadow-sm relative overflow-hidden">
-                  <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    <CreditCard className="w-5 h-5 text-primary" />
-                    Payment Details
-                  </h2>
-                  
-                  <form onSubmit={handleCheckout} id="enroll-form" className="space-y-6 relative z-10">
-                    <div className="flex flex-wrap gap-4 mb-6">
-                      <label className={`flex-1 border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'card' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-border bg-background/50 hover:bg-muted'}`}>
-                        <div className="flex items-center gap-3">
-                          <input type="radio" name="payment" checked={paymentMethod === 'card'} onChange={() => setPaymentMethod('card')} className="text-primary focus:ring-primary w-4 h-4" />
-                          <span className="font-medium">Credit Card</span>
-                        </div>
-                      </label>
-                      <label className={`flex-1 border rounded-xl p-4 cursor-pointer transition-all ${paymentMethod === 'paypal' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-border bg-background/50 hover:bg-muted'}`}>
-                        <div className="flex items-center gap-3">
-                          <input type="radio" name="payment" checked={paymentMethod === 'paypal'} onChange={() => setPaymentMethod('paypal')} className="text-primary focus:ring-primary w-4 h-4" />
-                          <span className="font-medium">PayPal</span>
-                        </div>
-                      </label>
-                    </div>
+            {/* Mode Switcher Tabs */}
+            <div className="grid grid-cols-2 gap-2 p-1.5 bg-[#FAFAF7] dark:bg-white/[0.04] rounded-2xl border border-[#E7E5F4] dark:border-white/[0.06] mb-6">
+              <button
+                type="button"
+                onClick={() => { setAuthMode("signin"); setAuthError(""); }}
+                className={`py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all ${authMode === "signin" ? "bg-[#8B5CF6] text-white shadow-md" : "text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white"}`}
+              >
+                Existing Account
+              </button>
+              <button
+                type="button"
+                onClick={() => { setAuthMode("register"); setAuthError(""); }}
+                className={`py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all ${authMode === "register" ? "bg-[#8B5CF6] text-white shadow-md" : "text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-white"}`}
+              >
+                New Learner Sign Up
+              </button>
+            </div>
 
-                    {paymentMethod === 'card' && (
-                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-4">
-                        <div className="space-y-2">
-                          <label className="text-sm font-medium">Card Number</label>
-                          <div className="relative">
-                            <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                            <input type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 font-mono" />
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <label className="text-sm font-medium">Expiry Date</label>
-                            <input type="text" placeholder="MM/YY" className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 font-mono" />
-                          </div>
-                          <div className="space-y-2">
-                            <label className="text-sm font-medium">CVC</label>
-                            <input type="text" placeholder="123" className="w-full px-4 py-2.5 rounded-xl border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-primary/50 font-mono" />
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {paymentMethod === 'paypal' && (
-                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="p-4 bg-background/50 border border-border rounded-xl text-center">
-                        <p className="text-muted-foreground text-sm">You will be redirected to PayPal to complete your purchase securely.</p>
-                      </motion.div>
-                    )}
-                  </form>
+            <form onSubmit={handleInlineAuth} className="space-y-4">
+              {authMode === "register" && (
+                <div className="space-y-1.5 text-left">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#4B5563] dark:text-[#D1D5DB]">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={authName}
+                    onChange={(e) => setAuthName(e.target.value)}
+                    placeholder="Enter your full name"
+                    className="w-full px-4 py-3 rounded-xl border border-[#E7E5F4] dark:border-white/[0.1] bg-[#FAFAF7] dark:bg-white/[0.03] text-sm text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] transition-all font-medium"
+                  />
                 </div>
               )}
 
+              <div className="space-y-1.5 text-left">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#4B5563] dark:text-[#D1D5DB]">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={authEmail}
+                  onChange={(e) => setAuthEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full px-4 py-3 rounded-xl border border-[#E7E5F4] dark:border-white/[0.1] bg-[#FAFAF7] dark:bg-white/[0.03] text-sm text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] transition-all font-medium"
+                />
+              </div>
+
+              <div className="space-y-1.5 text-left">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#4B5563] dark:text-[#D1D5DB]">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  value={authPassword}
+                  onChange={(e) => setAuthPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full px-4 py-3 rounded-xl border border-[#E7E5F4] dark:border-white/[0.1] bg-[#FAFAF7] dark:bg-white/[0.03] text-sm text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] transition-all font-medium"
+                />
+              </div>
+
+              {authError && (
+                <div className="p-3.5 text-xs sm:text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 rounded-xl border border-red-200 dark:border-red-900/50 font-semibold flex items-start gap-2 animate-in fade-in duration-200">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
+                  <span>{authError}</span>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={authSubmitting}
+                className="w-full py-3.5 px-6 bg-[#8B5CF6] hover:bg-[#7C3AED] disabled:opacity-70 text-white rounded-xl font-bold text-sm shadow-lg shadow-[#8B5CF6]/20 transition-all active:scale-95 flex items-center justify-center gap-2 mt-2"
+              >
+                {authSubmitting ? (
+                  <span>Processing Credentials...</span>
+                ) : (
+                  <span>{authMode === "signin" ? "Sign In & Continue Enrollment ➔" : "Create Account & Unlock Checkout ➔"}</span>
+                )}
+              </button>
+            </form>
+
+            <div className="mt-8 pt-6 border-t border-[#E7E5F4] dark:border-white/[0.08] flex items-center justify-center gap-4 text-[11px] text-[#6B7280] dark:text-[#9CA3AF] font-medium">
+              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#14B8A6]" /> Encrypted Credentials</span>
+              <span>•</span>
+              <span>Instant Access</span>
             </div>
+          </div>
+        ) : (
+          /* Default "form" Enrollment Checkout Experience for Authenticated Learners */
+          <>
+            {/* Top Stepper */}
+            <EnrollmentStepper
+              currentStep={currentStep}
+              onStepClick={(step) => setCurrentStep(step)}
+            />
 
-            {/* Right Column: Order Summary */}
-            <div className="w-full lg:w-[400px]">
-              <div className="sticky top-24 bg-card border border-border/50 rounded-2xl p-6 shadow-xl shadow-primary/5">
-                <h3 className="text-lg font-bold mb-4 border-b border-border/80 pb-4">Order Summary</h3>
+            {/* Master Responsive Grid with Equal Height Stretch Alignment */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+
+              {/* LEFT COLUMN: Student Information Form */}
+              <div className="min-w-0 flex flex-col h-full">
                 
-                <div className="flex gap-4 mb-6">
-                  <div className="w-20 h-20 rounded-lg bg-muted flex items-center justify-center shrink-0 overflow-hidden relative">
-                    <img src="/Assets/images/hero_illustration.png" alt="Course" className="absolute inset-0 w-full h-full object-cover opacity-80" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold line-clamp-2 leading-tight">{courseParam}</h4>
-                    <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> Lifetime Access
-                    </p>
-                  </div>
+                {/* SECTION 1: STUDENT INFORMATION */}
+                <div className="flex-1 flex flex-col">
+                  <StudentInfoSection
+                    formData={studentForm}
+                    onChange={handleStudentChange}
+                    errors={errors}
+                    userEmail={user?.email || undefined}
+                    userName={user?.name || undefined}
+                  />
                 </div>
 
-                <div className="space-y-3 text-sm border-t border-border/80 pt-4 mb-4">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Original Price</span>
-                    <span className="line-through">{isFree ? "₹2,999" : "₹4,999"}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Discount</span>
-                    <span className="text-green-500">-{isFree ? "₹2,999" : "₹1,000"}</span>
-                  </div>
-                </div>
-
-                <div className="border-t border-border/80 pt-4 mb-6 flex justify-between items-center">
-                  <span className="font-bold text-lg">Total</span>
-                  <span className="font-bold text-2xl text-primary">{isFree ? "Free" : "₹3,999"}</span>
-                </div>
-
-                <button
-                  type="submit"
-                  form="enroll-form"
-                  onClick={isFree ? handleCheckout : undefined}
-                  disabled={isProcessing}
-                  className="w-full py-3.5 px-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:hover:scale-100"
-                >
-                  {isProcessing ? (
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      Processing...
-                    </span>
-                  ) : (
-                    <>
-                      {isFree ? "Complete Enrollment" : "Pay Securely"}
-                      <ShieldCheck className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-
-                <p className="text-xs text-center text-muted-foreground mt-4 flex items-center justify-center gap-1">
-                  <Lock className="w-3 h-3" /> Guaranteed secure checkout
-                </p>
-
-                {/* Benefits mini-list */}
-                <div className="mt-8 space-y-3">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium">30-Day Money-Back Guarantee</p>
-                      <p className="text-xs text-muted-foreground">Not satisfied? Get a full refund.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium">Verifiable Certificate</p>
-                      <p className="text-xs text-muted-foreground">Share your success on LinkedIn.</p>
-                    </div>
-                  </div>
+                {/* Mobile inline Payment CTA just below forms on small screens */}
+                <div className="block lg:hidden mt-6">
+                  <PaymentCTAAndTrust
+                    onProceed={handleProceedToPayment}
+                    isProcessing={isProcessing}
+                    amountText={feeParam}
+                    isFree={isFree}
+                    disabled={!studentForm.agreedToTerms}
+                  />
                 </div>
 
               </div>
+
+              {/* RIGHT COLUMN: Sticky Order Summary */}
+              <div className="min-w-0 flex flex-col h-full">
+                
+                {/* Sticky Wrapper stretching to equal height of Left Column */}
+                <div className="lg:sticky lg:top-28 flex flex-col justify-between flex-1 space-y-6">
+                  
+                  {/* ORDER SUMMARY (flex-1 to align perfectly with left box height) */}
+                  <OrderSummaryCard
+                    courseTitle={courseParam}
+                    amount={feeParam}
+                    isFree={isFree}
+                    onCouponApply={(discount, code) => {
+                      setAppliedDiscount(discount);
+                      setAppliedCode(code);
+                    }}
+                  />
+
+                  {/* Desktop Primary Payment CTA */}
+                  <div className="hidden lg:block shrink-0">
+                    <PaymentCTAAndTrust
+                      onProceed={handleProceedToPayment}
+                      isProcessing={isProcessing}
+                      amountText={displayAmount}
+                      isFree={isFree}
+                      disabled={!studentForm.agreedToTerms}
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </>
+        )}
+
+      </div>
+
+      {/* MOBILE FLOATING ORDER SUMMARY DRAWER TRIGGER & STICKY BOTTOM BAR */}
+      {viewState === "form" && !!user && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-[#14182F] border-t border-[#E7E5F4] dark:border-white/[0.1] shadow-2xl p-3 sm:p-4 flex lg:hidden items-center justify-between gap-3 backdrop-blur-md">
+          <div 
+            onClick={() => setMobileDrawerOpen(!mobileDrawerOpen)}
+            className="flex flex-col cursor-pointer min-w-0 flex-1"
+          >
+            <span className="text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-semibold uppercase tracking-wider flex items-center gap-1">
+              <ShoppingBag className="w-3 h-3 text-[#8B5CF6]" /> Order Total <span className="underline text-[#8B5CF6] ml-0.5">{mobileDrawerOpen ? "Hide" : "Details"} ↑</span>
+            </span>
+            <span className="text-lg sm:text-xl font-semibold text-[#111827] dark:text-white font-variant-numeric truncate">
+              {displayAmount}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleProceedToPayment}
+            disabled={isProcessing || !studentForm.agreedToTerms}
+            className={`px-5 sm:px-6 py-3 rounded-xl font-semibold text-sm shadow-md shrink-0 transition-all ${
+              isProcessing || !studentForm.agreedToTerms
+                ? "bg-[#D1D5DB] dark:bg-[#374151] text-[#6B7280] dark:text-[#9CA3AF] cursor-not-allowed shadow-none"
+                : "bg-[#8B5CF6] text-white hover:bg-[#7C3AED] active:scale-95 shadow-[#8B5CF6]/25"
+            }`}
+          >
+            {isProcessing ? "Processing..." : isFree ? "Enroll now" : "Proceed to payment"}
+          </button>
+        </div>
+      )}
+
+      {/* MOBILE ORDER SUMMARY MODAL / DRAWER */}
+      <AnimatePresence>
+        {mobileDrawerOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 300 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 300 }}
+            className="fixed inset-x-0 bottom-16 z-30 lg:hidden bg-white dark:bg-[#14182F] border-t border-[#E7E5F4] dark:border-white/[0.15] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] p-5 max-h-[80vh] overflow-y-auto"
+          >
+            <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#E7E5F4] dark:border-white/[0.08]">
+              <span className="font-semibold text-sm text-[#111827] dark:text-white flex items-center gap-2">
+                <ShoppingBag className="w-4 h-4 text-[#8B5CF6]" /> Order breakdown
+              </span>
+              <button
+                type="button"
+                onClick={() => setMobileDrawerOpen(false)}
+                className="p-1 text-[#6B7280] hover:text-[#111827] dark:hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+            <OrderSummaryCard
+              courseTitle={courseParam}
+              amount={feeParam}
+              isFree={isFree}
+              onCouponApply={(discount, code) => {
+                setAppliedDiscount(discount);
+                setAppliedCode(code);
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-// User Icon since lucide-react User might have different import
-function UserIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
+      {/* Footer */}
+      <Footer />
+
+    </div>
   );
 }
 
 export default function EnrollPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-      <EnrollContent />
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#FAFAF7] dark:bg-[#060816] flex flex-col items-center justify-center p-6 text-center text-[#374151] dark:text-[#9CA3AF] font-semibold">
+        <div className="w-12 h-12 border-4 border-[#8B5CF6] border-t-transparent rounded-full animate-spin mb-4" />
+        <span>Initializing bank-grade 256-bit encrypted checkout...</span>
+      </div>
+    }>
+      <EnrollPageContent />
     </Suspense>
   );
 }

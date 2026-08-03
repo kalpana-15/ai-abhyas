@@ -68,9 +68,11 @@ export function Hero() {
               Explore Courses <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-base border-border bg-background/50 backdrop-blur-sm hover:bg-muted">
-            Talk to an Advisor
-          </Button>
+          <Link href="/contact" className="w-full sm:w-auto">
+            <Button size="lg" variant="outline" className="w-full h-14 px-8 text-base border-border bg-background/50 backdrop-blur-sm hover:bg-muted">
+              Talk to an Advisor
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -10,13 +10,60 @@ import {
   Brain, Sparkles, Cpu, Database, MessageSquare, Eye, 
   Network, Languages, ChevronDown, EyeOff, Check, CheckCircle2
 } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function RegisterPage() {
+function RegisterContent() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [learningMode, setLearningMode] = useState("Online");
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
   const [agreed, setAgreed] = useState(false);
+
+  const { register } = useAuth();
+  const router = useRouter();
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.error || "Failed to register account");
+        setLoading(false);
+        return;
+      }
+
+      register(data.user, redirect || "/dashboard");
+      router.push(redirect || "/dashboard");
+    } catch (err) {
+      setError("A network error occurred while registering. Please try again.");
+      setLoading(false);
+    }
+  };
 
   const toggleCourse = (course: string) => {
     setSelectedCourses(prev => 
@@ -50,18 +97,10 @@ export default function RegisterPage() {
           {/* Content Wrapper for Top & Text to keep them grouped at the top */}
           <div className="flex flex-col">
             {/* Top Section: Logo and Back Button */}
-            <div className="relative z-10 flex items-start justify-between w-full mb-10">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/30">
-                  <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.792 0-5.484-.235-8.07-.683-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="block text-lg font-bold font-heading tracking-tight text-gray-900 dark:text-white leading-tight">AI Abhyas</span>
-                  <span className="block text-[9px] text-gray-500 dark:text-gray-400 font-medium tracking-wide">Learn AI. Build Tomorrow.</span>
-                </div>
-              </div>
+            <div className="relative z-10 flex items-center justify-between w-full mb-10">
+              <Link href="/" className="inline-block">
+                <Logo className="h-7 md:h-8 w-auto" />
+              </Link>
 
               <Link href="/" className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all group bg-gray-100/50 hover:bg-gray-100 dark:bg-white/5 dark:hover:bg-white/10 px-3 py-1.5 rounded-full border border-gray-200/50 dark:border-white/10 backdrop-blur-sm mt-0.5">
                 <svg className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -193,7 +232,7 @@ export default function RegisterPage() {
               <p className="text-sm text-gray-500 dark:text-gray-400">Create your learner account and begin your AI journey.</p>
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
+            <form onSubmit={handleRegister} className="space-y-8">
               
               {/* Personal Information */}
               <div>
@@ -206,6 +245,9 @@ export default function RegisterPage() {
                       <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input 
                         type="text" 
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your full name"
                         className="w-full pl-10 pr-4 py-2.5 text-sm bg-transparent border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400 outline-none"
                       />
@@ -218,6 +260,9 @@ export default function RegisterPage() {
                       <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input 
                         type="email" 
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
                         className="w-full pl-10 pr-4 py-2.5 text-sm bg-transparent border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400 outline-none"
                       />
@@ -240,8 +285,8 @@ export default function RegisterPage() {
                     <label className="text-xs font-medium text-gray-700 dark:text-gray-300">Select Occupation</label>
                     <div className="relative">
                       <Briefcase className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-                      <select className="w-full pl-10 pr-10 py-2.5 text-sm bg-transparent border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer outline-none">
-                        <option value="" disabled selected className="text-gray-400 dark:bg-card">Choose your occupation</option>
+                      <select defaultValue="" className="w-full pl-10 pr-10 py-2.5 text-sm bg-transparent border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white appearance-none cursor-pointer outline-none">
+                        <option value="" disabled className="text-gray-400 dark:bg-card">Choose your occupation</option>
                         <option value="student" className="dark:bg-card">Student</option>
                         <option value="professional" className="dark:bg-card">Working Professional</option>
                         <option value="entrepreneur" className="dark:bg-card">Entrepreneur</option>
@@ -281,6 +326,9 @@ export default function RegisterPage() {
                       <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input 
                         type={showPassword ? "text" : "password"}
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter password"
                         className="w-full pl-10 pr-10 py-2.5 text-sm bg-transparent border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400 outline-none"
                       />
@@ -300,6 +348,9 @@ export default function RegisterPage() {
                       <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input 
                         type={showConfirmPassword ? "text" : "password"}
+                        required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Confirm password"
                         className="w-full pl-10 pr-10 py-2.5 text-sm bg-transparent border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 dark:text-white placeholder:text-gray-400 outline-none"
                       />
@@ -405,16 +456,22 @@ export default function RegisterPage() {
                   </span>
                 </label>
 
+                {error && (
+                  <div className="p-3.5 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/30 rounded-xl border border-red-200 dark:border-red-900/50 font-medium animate-in fade-in duration-200">
+                    {error}
+                  </div>
+                )}
+
                 <button 
                   type="submit"
                   className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-medium text-sm transition-all active:scale-[0.98] shadow-lg shadow-primary/25 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100"
-                  disabled={!agreed}
+                  disabled={!agreed || loading}
                 >
-                  Create Account →
+                  {loading ? "Creating Account..." : "Create Account →"}
                 </button>
 
                 <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-                  Already have an account? <Link href="/login" className="text-primary font-semibold hover:underline">Login</Link>
+                  Already have an account? <Link href={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : "/login"} className="text-primary font-semibold hover:underline">Login</Link>
                 </p>
               </div>
 
@@ -424,5 +481,13 @@ export default function RegisterPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">Loading...</div>}>
+      <RegisterContent />
+    </Suspense>
   );
 }

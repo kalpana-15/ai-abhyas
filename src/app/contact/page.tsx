@@ -17,9 +17,47 @@ import {
   Star
 } from "lucide-react";
 import Link from "next/link";
+import { submitInquiry } from "@/actions/contactActions";
+import { AdvisorBot } from "@/components/ui/AdvisorBot";
+import { Bot } from "lucide-react";
 
 export default function ContactPage() {
   const [activeTab, setActiveTab] = useState<'contact' | 'office'>('contact');
+  
+  // Form state
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFeedback(null);
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("message", `[Subject: ${subject}] ${message}`);
+
+    const res = await submitInquiry(formData);
+    setLoading(false);
+
+    if (res.success) {
+      setFeedback({ type: 'success', text: res.message || "Thank you! Your message has been received." });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setSubject("");
+      setMessage("");
+    } else {
+      setFeedback({ type: 'error', text: res.error || "Something went wrong. Please try again." });
+    }
+  };
 
   return (
     <>
@@ -56,6 +94,13 @@ export default function ContactPage() {
                 
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
                   <button 
+                    onClick={() => { document.getElementById('advisor-section')?.scrollIntoView({ behavior: 'smooth' }) }} 
+                    className="inline-flex items-center justify-center gap-2 px-8 h-14 text-base font-bold text-white bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#14B8A6] rounded-full hover:opacity-95 transition-all shadow-lg shadow-[#8B5CF6]/25 hover:-translate-y-1"
+                  >
+                    <Bot className="w-5 h-5" />
+                    ⚡ Talk to AI Advisor
+                  </button>
+                  <button 
                     onClick={() => { document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }) }} 
                     className="inline-flex items-center justify-center gap-2 px-8 h-14 text-base font-medium text-primary-foreground bg-primary rounded-full hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25 hover:-translate-y-1"
                   >
@@ -90,6 +135,21 @@ export default function ContactPage() {
 
           {/* Fade transition to next section */}
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+        </section>
+
+        {/* Talk to AI Advisor Section */}
+        <section id="advisor-section" className="pt-16 pb-12 bg-background relative z-20">
+          <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+                Talk to an <span className="text-primary">Advisor</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Get immediate answers about courses, pricing, and enrollments.
+              </p>
+            </div>
+            <AdvisorBot />
+          </div>
         </section>
 
         {/* Contact Form Section (Banner) */}
@@ -133,13 +193,25 @@ export default function ContactPage() {
                       <p className="text-[13px] text-muted-foreground">Fill out the form below and we'll get back to you shortly.</p>
                     </div>
 
-                    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-4" onSubmit={handleSubmit}>
+                      {feedback && (
+                        <div className={`p-3.5 rounded-xl text-sm font-medium border animate-in fade-in duration-200 ${
+                          feedback.type === 'success' 
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
+                            : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800'
+                        }`}>
+                          {feedback.text}
+                        </div>
+                      )}
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-0.5">
                           <label className="text-[11px] font-medium text-foreground">Full Name <span className="text-destructive">*</span></label>
                           <input 
                             type="text" 
                             placeholder="John Doe"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full px-3 py-1.5 text-[13px] rounded-lg border border-border bg-background focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none shadow-sm"
                             required
                           />
@@ -149,6 +221,8 @@ export default function ContactPage() {
                           <input 
                             type="email" 
                             placeholder="john@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-3 py-1.5 text-[13px] rounded-lg border border-border bg-background focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none shadow-sm"
                             required
                           />
@@ -161,6 +235,8 @@ export default function ContactPage() {
                           <input 
                             type="tel" 
                             placeholder="+1 (555) 000-0000"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                             className="w-full px-3 py-1.5 text-[13px] rounded-lg border border-border bg-background focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none shadow-sm"
                           />
                         </div>
@@ -187,6 +263,8 @@ export default function ContactPage() {
                         <input 
                           type="text" 
                           placeholder="How can we help you?"
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
                           className="w-full px-3 py-1.5 text-[13px] rounded-lg border border-border bg-background focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none shadow-sm"
                           required
                         />
@@ -196,6 +274,8 @@ export default function ContactPage() {
                         <label className="text-[11px] font-medium text-foreground">Message <span className="text-destructive">*</span></label>
                         <textarea 
                           rows={2}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
                           placeholder="Please provide details about your inquiry..."
                           className="w-full px-3 py-1.5 text-[13px] rounded-lg border border-border bg-background focus:bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none shadow-sm"
                           required
@@ -204,10 +284,11 @@ export default function ContactPage() {
 
                       <button 
                         type="submit"
-                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground font-semibold text-[13px] rounded-lg hover:bg-primary/90 transition-all shadow-md hover:shadow-primary/25 hover:-translate-y-0.5 mt-2"
+                        disabled={loading}
+                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary hover:bg-primary/90 disabled:opacity-70 text-primary-foreground font-semibold text-[13px] rounded-lg transition-all shadow-md hover:shadow-primary/25 hover:-translate-y-0.5 mt-2"
                       >
                         <Send className="w-4 h-4" />
-                        Send Message
+                        {loading ? "Sending Message..." : "Send Message"}
                       </button>
                     </form>
                   </div>

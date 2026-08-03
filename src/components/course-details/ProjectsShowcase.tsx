@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Hammer, ArrowRight } from "lucide-react";
 
-export function ProjectsShowcase({ projects }: { projects: any[] }) {
+export function ProjectsShowcase({ projects = [] }: { projects?: any[] }) {
+  const safeProjects = projects || [];
   return (
     <section className="mb-0.5">
       <div className="mb-8">
@@ -13,7 +14,7 @@ export function ProjectsShowcase({ projects }: { projects: any[] }) {
       </div>
 
       <div className="flex flex-col gap-6">
-        {projects.map((project, index) => (
+        {safeProjects.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}

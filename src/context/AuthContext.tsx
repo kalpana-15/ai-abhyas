@@ -2,8 +2,10 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { enrollInCourse } from "@/actions/enrollmentActions";
 
 export interface User {
+  id?: string;
   name: string;
   email: string;
   role?: string;
@@ -13,10 +15,12 @@ export interface User {
 export interface AuthContextType {
   user: User | null;
   enrolledCourses: string[];
-  login: (userData: User) => void;
-  register: (userData: User) => void;
+  loading: boolean;
+  login: (userData: User, redirectPath?: string) => void;
+  register: (userData: User, redirectPath?: string) => void;
   logout: () => void;
-  enroll: (courseTitle: string) => void;
+  enroll: (courseTitle: string, shouldNavigate?: boolean) => Promise<void>;
+  refreshSession: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,74 +28,102 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [enrolledCourses, setEnrolledCourses] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    // Load from localStorage on initial render
-    const storedUser = localStorage.getItem("ai_abhyas_user");
-    const storedCourses = localStorage.getItem("ai_abhyas_courses");
-    
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else {
-      // Seed Dummy User
-      const dummyUser = { 
-        name: "Ananya Singh", 
-        email: "ananya@example.com",
-        role: "Student",
-        avatar: "https://i.pravatar.cc/150?u=ananya" 
-      };
-      setUser(dummyUser);
-      localStorage.setItem("ai_abhyas_user", JSON.stringify(dummyUser));
+  const refreshSession = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.authenticated && data.user) {
+          setUser({
+            id: data.user.id,
+            name: data.user.name,
+            email: data.user.email,
+            role: data.user.role,
+            avatar: data.user.avatar,
+          });
+          setEnrolledCourses(data.user.enrolledCourses || []);
+        } else {
+          setUser(null);
+          setEnrolledCourses([]);
+        }
+      }
+    } catch (error) {
+      console.error("Error refreshing backend authentication session:", error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (storedCourses) {
-      setEnrolledCourses(JSON.parse(storedCourses));
-    } else {
-      // Seed Dummy Enrollment
-      const dummyCourse = "Generative AI Masterclass";
-      setEnrolledCourses([dummyCourse]);
-      localStorage.setItem("ai_abhyas_courses", JSON.stringify([dummyCourse]));
-    }
+  useEffect(() => {
+    // Perform verification of live JWT cookie session from PostgreSQL backend on mount
+    refreshSession();
   }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: User & { enrolledCourses?: string[] }, redirectPath?: string) => {
     setUser(userData);
-    localStorage.setItem("ai_abhyas_user", JSON.stringify(userData));
-    router.push("/dashboard");
+    if (userData.enrolledCourses) {
+      setEnrolledCourses(userData.enrolledCourses);
+    }
+    router.push(redirectPath || "/dashboard");
   };
 
-  const register = (userData: User) => {
+  const register = (userData: User, redirectPath?: string) => {
     setUser(userData);
-    localStorage.setItem("ai_abhyas_user", JSON.stringify(userData));
-    // Redirection happens in the component
+    setEnrolledCourses([]);
+    if (redirectPath) {
+      router.push(redirectPath);
+    } else {
+      router.push("/dashboard");
+    }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("ai_abhyas_user");
-    router.push("/");
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch (error) {
+      console.error("Error invoking logout route:", error);
+    } finally {
+      setUser(null);
+      setEnrolledCourses([]);
+      router.push("/");
+    }
   };
 
-  const enroll = (courseTitle: string) => {
+  const enroll = async (courseTitle: string, shouldNavigate = true) => {
     if (!user) {
-      // If not logged in, redirect to login
+      // Prompt sign in if unauthenticated
       router.push(`/login?redirect=/enroll?course=${encodeURIComponent(courseTitle)}`);
       return;
     }
-    
+
+    // Immediately reflect optimistic update in state for snappy responsiveness
     setEnrolledCourses((prev) => {
-      if (prev.includes(courseTitle)) return prev; // Already enrolled
-      const newCourses = [...prev, courseTitle];
-      localStorage.setItem("ai_abhyas_courses", JSON.stringify(newCourses));
-      return newCourses;
+      if (prev.includes(courseTitle)) return prev;
+      return [...prev, courseTitle];
     });
-    
-    router.push("/dashboard");
+
+    // Persist real record in PostgreSQL via Next.js Server Action
+    const result = await enrollInCourse(courseTitle);
+    if (result && !result.success) {
+      console.warn("Enrollment server action feedback:", result.error || result.message);
+    }
+
+    // Refresh database session to guarantee exact synchronization of enrolled courses on dashboard
+    await refreshSession();
+
+    if (shouldNavigate) {
+      router.push("/dashboard");
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, enrolledCourses, login, register, logout, enroll }}>
+    <AuthContext.Provider
+      value={{ user, enrolledCourses, loading, login, register, logout, enroll, refreshSession }}
+    >
       {children}
     </AuthContext.Provider>
   );

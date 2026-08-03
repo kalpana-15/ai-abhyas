@@ -1,12 +1,4 @@
-export interface Course {
-  id: string;
-  title: string;
-  description: string;
-  level: string;
-  duration: string;
-  image: string;
-  tags: string[];
-}
+export * from "./course";
 
 export interface Testimonial {
   id: string;

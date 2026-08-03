@@ -5,11 +5,19 @@ import { CheckCircle2, ChevronRight, Download, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 export function StickyEnrollment({ course }: { course: any }) {
-  const { enroll, enrolledCourses } = useAuth();
+  const { user, enroll, enrolledCourses } = useAuth();
+  const router = useRouter();
   const isEnrolled = enrolledCourses.includes(course.title);
+  const isFree = course.fee === "Free" || course.fee === "₹0" || course.fee === "$0";
+
+  const handleEnrollClick = () => {
+    const enrollUrl = `/enroll?courseId=${course.id}&course=${encodeURIComponent(course.title)}&fee=${encodeURIComponent(isFree ? "Free" : course.fee)}&type=${isFree ? "free" : "paid"}`;
+    router.push(enrollUrl);
+  };
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -31,16 +39,16 @@ export function StickyEnrollment({ course }: { course: any }) {
       <div className="flex flex-col gap-4 p-5">
         
         {/* Pricing */}
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Course Fee</span>
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-heading font-medium text-muted-foreground line-through">
-              {course.fee.replace(/[0-9,]+/, (match: string) => {
+        <div className="flex items-center justify-between gap-2 whitespace-nowrap mb-1">
+          <span className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider shrink-0">Course Fee</span>
+          <div className="flex items-baseline gap-1.5 shrink-0">
+            <span className="text-xs sm:text-[13px] font-heading font-medium text-muted-foreground line-through">
+              {course.fee.split('/')[0].replace(/[0-9,]+/, (match: string) => {
                 const num = parseInt(match.replace(/,/g, ''));
                 return (num * 1.5).toLocaleString();
               })}
             </span>
-            <h3 className="text-2xl font-heading font-bold text-foreground">{course.fee}</h3>
+            <h3 className="text-base sm:text-lg font-heading font-bold text-foreground">{course.fee}</h3>
           </div>
         </div>
 
@@ -91,7 +99,7 @@ export function StickyEnrollment({ course }: { course: any }) {
               </Button>
             </Link>
           ) : (
-            <Button onClick={() => enroll(course.title)} size="lg" className="w-full h-10 font-bold text-xs shadow-lg shadow-primary/20">
+            <Button onClick={handleEnrollClick} size="lg" className="w-full h-10 font-bold text-xs shadow-lg shadow-primary/20">
               Enroll Now
             </Button>
           )}

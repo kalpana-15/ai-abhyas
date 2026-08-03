@@ -25,8 +25,9 @@ const allSkills = Array.from(new Set(coursesData.flatMap(c => c.skills))).sort()
 
 // Helper to parse Fee
 const parseFee = (feeStr: string) => {
-  if (feeStr.toLowerCase() === "free") return 0;
-  return parseInt(feeStr.replace(/[^0-9]/g, "")) || 0;
+  if (!feeStr || feeStr.toLowerCase() === "free") return 0;
+  const baseStr = feeStr.split("/")[0] || "";
+  return parseInt(baseStr.replace(/[^0-9]/g, ""), 10) || 0;
 };
 
 // Helper to parse Duration
@@ -138,13 +139,19 @@ export function CourseCatalog() {
       }
 
       // 2. Level
-      if (activeFilters.level.length > 0 && !activeFilters.level.includes(course.level)) return false;
+      if (activeFilters.level.length > 0) {
+        if (!activeFilters.level.some(l => course.level.toLowerCase().includes(l.toLowerCase()))) return false;
+      }
 
       // 3. Mode
-      if (activeFilters.mode.length > 0 && !activeFilters.mode.includes(course.mode)) return false;
+      if (activeFilters.mode.length > 0) {
+        if (!activeFilters.mode.some(m => course.mode.toLowerCase().includes(m.toLowerCase()))) return false;
+      }
 
       // 4. Status
-      if (activeFilters.status.length > 0 && !activeFilters.status.includes(course.status)) return false;
+      if (activeFilters.status.length > 0) {
+        if (!activeFilters.status.some(s => course.status.toLowerCase().includes(s.toLowerCase()))) return false;
+      }
 
       // 5. Certificate
       if (activeFilters.certificate.length > 0) {

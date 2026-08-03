@@ -2,398 +2,212 @@
   {
     "id": "c1",
     "title": "Generative AI Masterclass",
-    "description": "Deep dive into Large Language Models, diffusion models, and building real-world generative AI applications for enterprise scaling.",
-    "level": "Advanced",
-    "mode": "Hybrid",
-    "status": "Limited Seats",
-    "duration": "12 Weeks",
-    "fee": "₹4,999",
-    "eligibility": "Tech Professionals",
-    "skills": ["Prompt Engineering", "LLM Fine-tuning", "Vector Databases", "LangChain"],
-    "highlights": ["Live Interactive Sessions", "Real Enterprise Projects", "1-on-1 Mentorship", "Official Certification"],
-    "students": "12.4k",
-    "rating": 4.9,
-    "certificateIncluded": true,
-    "lastUpdated": "6/2026",
-    "language": "English",
-    "totalRatings": "4.2k",
-    "isPremium": true,
-    "promoText": "Master Large Language Models and build real-world enterprise applications.",
-    "image": "/Assets/images/ai masterclase.png",
-    "curriculum": [
-      { "id": 1, "title": "Introduction to GenAI", "hours": 4, "lessons": 10, "resources": 3 },
-      { "id": 2, "title": "Understanding LLMs & Transformers", "hours": 8, "lessons": 15, "resources": 5 },
-      { "id": 3, "title": "Vector Databases & RAG", "hours": 10, "lessons": 18, "resources": 8 },
-      { "id": 4, "title": "Building with LangChain & LlamaIndex", "hours": 12, "lessons": 20, "resources": 10 },
-      { "id": 5, "title": "Capstone: Enterprise Chatbot", "hours": 16, "lessons": 5, "resources": 2 }
-    ],
-    "projects": [
-      { "name": "Enterprise RAG System", "difficulty": "Advanced", "skills": ["LangChain", "Pinecone", "Python"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" },
-      { "name": "Multi-Agent Support Bot", "difficulty": "Advanced", "skills": ["AutoGen", "OpenAI", "React"], "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["ChatGPT", "Claude", "Python", "LangChain", "Pinecone", "GitHub", "Cursor"],
-    "instructor": {
-      "name": "Dr. Sarah Chen",
-      "designation": "Principal AI Engineer",
-      "experience": "12+ Years",
-      "students": "45K+",
-      "courses": 8,
-      "rating": 4.9,
-      "bio": "Former Lead AI Researcher at Tech Giants. Passionate about democratizing AI education.",
-      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c2",
-    "title": "AI Foundations for Everyone",
-    "description": "Master the core concepts of artificial intelligence and machine learning without writing a single line of code.",
-    "level": "Beginner",
-    "mode": "Online",
-    "status": "Open",
-    "duration": "4 Weeks",
-    "fee": "Free",
-    "eligibility": "Anyone",
-    "skills": ["AI Fundamentals", "ChatGPT Mastery", "Workflow Automation", "Prompting"],
-    "highlights": ["Self-Paced Learning", "Daily Quizzes", "Community Access", "Certificate of Completion"],
-    "students": "45.2k",
-    "rating": 4.8,
-    "certificateIncluded": true,
-    "promoText": "Master the core concepts of AI and machine learning without writing a single line of code.",
-    "image": "/Assets/images/ai for everyone.png",
-    "curriculum": [
-      { "id": 1, "title": "What is AI?", "hours": 2, "lessons": 5, "resources": 1 },
-      { "id": 2, "title": "Everyday AI Tools", "hours": 3, "lessons": 8, "resources": 2 },
-      { "id": 3, "title": "Prompt Engineering Basics", "hours": 4, "lessons": 10, "resources": 4 },
-      { "id": 4, "title": "Ethics & Future of AI", "hours": 2, "lessons": 4, "resources": 1 }
-    ],
-    "projects": [
-      { "name": "Personal Assistant Setup", "difficulty": "Beginner", "skills": ["ChatGPT", "Prompting"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["ChatGPT", "Midjourney", "Notion AI", "Canva AI"],
-    "instructor": {
-      "name": "Mark Stevens",
-      "designation": "AI Educator",
-      "experience": "5+ Years",
-      "students": "100K+",
-      "courses": 3,
-      "rating": 4.8,
-      "bio": "Specializes in making complex tech concepts easy for absolute beginners.",
-      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c3",
-    "title": "Machine Learning Engineering",
-    "description": "Learn the mathematics and programming behind traditional machine learning algorithms with Python and deploy them to production.",
+    "description": "Comprehensive roadmap and production training for Generative AI, LLMs, and Foundation Models using LangChain, RAG, LCEL Runnables, and Autonomous AI Agents.",
     "level": "Intermediate",
-    "mode": "Offline",
+    "mode": "Online Interactive",
     "status": "Open",
-    "duration": "8 Weeks",
-    "fee": "₹5,499",
-    "eligibility": "Graduates",
-    "skills": ["Python", "Scikit-Learn", "Data Pipeline", "Model Deployment"],
-    "highlights": ["In-Person Bootcamp", "Capstone Project", "Career Support", "Industry Case Studies"],
-    "students": "8.1k",
-    "rating": 4.7,
-    "certificateIncluded": true,
-    "promoText": "Learn the math and programming behind traditional machine learning algorithms.",
-    "image": "/Assets/images/machine learning engneering.png",
+    "duration": "8 Weeks (120 hrs)",
+    "fee": "₹4,999 / $65",
+    "eligibility": "Basic proficiency in Python and foundational Software Development Concepts.",
+    "skills": [
+      "LangChain",
+      "Prompt Engineering",
+      "RAG Pipeline",
+      "Vector Stores",
+      "LCEL Runnables",
+      "Autonomous AI Agents"
+    ],
+    "tools": [
+      "LangChain",
+      "OpenAI API",
+      "HuggingFace",
+      "Ollama",
+      "Pydantic",
+      "Chroma DB",
+      "Pinecone",
+      "Python 3.12"
+    ],
+    "whatYouWillLearn": [
+      "Master Nitish's Generative AI 2027 Roadmap covering both the Builder's Track and User's Track.",
+      "Integrate Foundation Models (LLMs) via OpenAI, Ollama, and HuggingFace within modular LangChain pipelines.",
+      "Design advanced Prompts, dynamic PromptTemplates, and Few-Shot In-Context learning sequences.",
+      "Enforce strictly validated JSON schemas and structured outputs using PydanticOutputParser.",
+      "Construct high-performance Runnable sequences using the LangChain Expression Language (LCEL).",
+      "Build production-grade RAG pipelines with Document Loaders, Semantic Text Splitters, and Vector Stores."
+    ],
     "curriculum": [
-      { "id": 1, "title": "Python Refresher & Pandas", "hours": 6, "lessons": 12, "resources": 4 },
-      { "id": 2, "title": "Supervised Learning", "hours": 10, "lessons": 15, "resources": 5 },
-      { "id": 3, "title": "Unsupervised Learning", "hours": 8, "lessons": 12, "resources": 4 },
-      { "id": 4, "title": "Model Evaluation & Tuning", "hours": 8, "lessons": 10, "resources": 3 },
-      { "id": 5, "title": "MLOps & Deployment", "hours": 10, "lessons": 14, "resources": 6 }
+      { "id": 1, "title": "Module 1: GenAI Roadmap for Beginners", "hours": 1, "lessons": 1 },
+      { "id": 2, "title": "Module 2: GenAI using LangChain Fundamentals", "hours": 1, "lessons": 1 },
+      { "id": 3, "title": "Module 3: Introduction to LangChain & Economic Impact", "hours": 1, "lessons": 1 },
+      { "id": 4, "title": "Module 4: LangChain Core Components & Modular Design", "hours": 1, "lessons": 1 },
+      { "id": 5, "title": "Module 5: LangChain Models & API Wrappers", "hours": 1, "lessons": 1 },
+      { "id": 6, "title": "Module 6: Prompts in LangChain (Part 1 - Fundamentals)", "hours": 1, "lessons": 1 },
+      { "id": 7, "title": "Module 7: Prompt Templates & Few-Shot In-Context Learning", "hours": 1, "lessons": 1 },
+      { "id": 8, "title": "Module 8: Structured Output in LangChain", "hours": 1, "lessons": 1 },
+      { "id": 9, "title": "Module 9: Output Parsers in LangChain", "hours": 1, "lessons": 1 },
+      { "id": 10, "title": "Module 10: What are Runnables & LCEL Expression Language", "hours": 2, "lessons": 1 },
+      { "id": 11, "title": "Module 11: Document Loaders (RAG Data Pipeline Preparation)", "hours": 1, "lessons": 1 },
+      { "id": 12, "title": "Module 12: Text Splitters & Strategic Chunking for Embeddings", "hours": 1, "lessons": 1 },
+      { "id": 13, "title": "Module 13: Vector Stores & High-Dimensional Embeddings", "hours": 2, "lessons": 1 },
+      { "id": 14, "title": "Module 14: Retrievers in LangChain (Dense & Hybrid Search)", "hours": 1, "lessons": 1 },
+      { "id": 15, "title": "Module 15: Capstone - Autonomous Tools & YouTube Chatbot", "hours": 2, "lessons": 1 }
     ],
     "projects": [
-      { "name": "House Price Predictor", "difficulty": "Intermediate", "skills": ["Python", "Scikit-Learn", "Flask"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" }
+      {
+        "name": "Autonomous YouTube RAG Chatbot with LangChain Tools",
+        "image": "/Assets/images/ai agents.png",
+        "difficulty": "Advanced",
+        "skills": ["LangChain", "Tool Calling", "RAG", "Vector Store", "Python"]
+      },
+      {
+        "name": "Enterprise Document Q&A Pipeline with Pydantic Validation",
+        "image": "/Assets/images/no code ai app building.png",
+        "difficulty": "Intermediate",
+        "skills": ["LCEL Runnables", "Pydantic", "Chroma DB", "Prompt Engineering"]
+      }
     ],
-    "tools": ["Python", "Pandas", "Scikit-Learn", "Jupyter", "Docker", "AWS"],
-    "instructor": {
-      "name": "Dr. Alan Turing (Pseudonym)",
-      "designation": "Senior ML Engineer",
-      "experience": "10+ Years",
-      "students": "20K+",
-      "courses": 5,
-      "rating": 4.7,
-      "bio": "Building scalable machine learning pipelines at Fortune 500 companies.",
-      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c4",
-    "title": "AI Agents & Automation",
-    "description": "Build autonomous AI agents that can perform complex workflows, browse the web, and interact with your existing APIs.",
-    "level": "Advanced",
-    "mode": "Online",
-    "status": "Coming Soon",
-    "duration": "6 Weeks",
-    "fee": "₹3,499",
-    "eligibility": "Developers",
-    "skills": ["AutoGPT", "API Integration", "Python", "Workflow Design"],
-    "highlights": ["Pre-recorded Modules", "Code Templates", "Discord Community", "Lifetime Access"],
-    "students": "1.2k",
+    "highlights": [
+      "15 Complete HD Modules",
+      "Downloadable PDF Study Guides & Roadmaps",
+      "Hands-on Capstone Chatbot Lab",
+      "Proctored Verification Certificate"
+    ],
+    "students": "2,840",
     "rating": 4.9,
-    "certificateIncluded": false,
-    "promoText": "Build autonomous AI agents that can perform complex workflows and interact with APIs.",
-    "image": "/Assets/images/ai agents.png",
-    "curriculum": [
-      { "id": 1, "title": "Intro to Autonomous Agents", "hours": 4, "lessons": 8, "resources": 2 },
-      { "id": 2, "title": "Tool Calling & APIs", "hours": 6, "lessons": 12, "resources": 4 },
-      { "id": 3, "title": "Memory & Planning", "hours": 8, "lessons": 14, "resources": 5 },
-      { "id": 4, "title": "Building with AutoGen", "hours": 10, "lessons": 16, "resources": 6 }
-    ],
-    "projects": [
-      { "name": "Automated Research Agent", "difficulty": "Advanced", "skills": ["Python", "AutoGen", "SerpAPI"], "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["Python", "OpenAI API", "AutoGen", "LangChain", "Make"],
+    "image": "/Assets/images/generative ai.png",
     "instructor": {
-      "name": "Elena Rodriguez",
-      "designation": "AI Automation Architect",
-      "experience": "8+ Years",
-      "students": "15K+",
-      "courses": 4,
-      "rating": 4.9,
-      "bio": "Pioneer in multi-agent systems and enterprise automation.",
-      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c5",
-    "title": "AI for Business Leaders",
-    "description": "Strategic framework for implementing AI in your organization. Measure ROI, manage risks, and scale AI adoption seamlessly.",
-    "level": "Intermediate",
-    "mode": "Hybrid",
-    "status": "Limited Seats",
-    "duration": "4 Weeks",
-    "fee": "₹5,999",
-    "eligibility": "Executives",
-    "skills": ["AI Strategy", "Risk Management", "ROI Calculation", "Change Management"],
-    "highlights": ["Executive Networking", "Case Studies", "Implementation Playbook", "Certification"],
-    "students": "3.5k",
-    "rating": 4.8,
-    "certificateIncluded": true,
-    "promoText": "Get a strategic framework for implementing AI in your organization and measuring ROI.",
-    "image": "/Assets/images/ai for businessman.png",
-    "curriculum": [
-      { "id": 1, "title": "AI Landscape & Terminology", "hours": 3, "lessons": 6, "resources": 2 },
-      { "id": 2, "title": "Identifying AI Use Cases", "hours": 4, "lessons": 8, "resources": 3 },
-      { "id": 3, "title": "Ethics, Privacy & Compliance", "hours": 4, "lessons": 7, "resources": 5 },
-      { "id": 4, "title": "Building the AI Roadmap", "hours": 5, "lessons": 10, "resources": 4 }
-    ],
-    "projects": [
-      { "name": "Company AI Strategy Deck", "difficulty": "Intermediate", "skills": ["Strategy", "ROI", "Planning"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["Excel", "PowerPoint", "Miro", "ChatGPT"],
-    "instructor": {
-      "name": "David Kim",
-      "designation": "VP of Strategy",
-      "experience": "15+ Years",
-      "students": "8K+",
-      "courses": 2,
-      "rating": 4.8,
-      "bio": "Former Management Consultant helping Fortune 500s adopt AI securely.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
+      "name": "Nitish Singh",
+      "designation": "Lead AI Architect & Senior Faculty",
+      "bio": "Senior AI Engineer and expert educator specializing in LLM applications, RAG architectures, and Autonomous AI Systems.",
+      "image": "/Assets/images/tutor/pexels-bymuratisikofficial-34762358.jpg"
     }
   },
   {
     "id": "c6",
-    "title": "Computer Vision Mastery",
-    "description": "Build state-of-the-art vision models for object detection, facial recognition, and medical imaging using PyTorch.",
-    "level": "Advanced",
-    "mode": "Online",
+    "title": "AI & Deep Learning Foundations Mastery",
+    "description": "Master neural networks, PyTorch tensors, transformer attention architectures, and scalable cloud deployment from foundational math to advanced generative vision systems.",
+    "level": "Beginner to Intermediate",
+    "mode": "Online Interactive",
     "status": "Open",
-    "duration": "10 Weeks",
-    "fee": "₹4,499",
-    "eligibility": "Data Scientists",
-    "skills": ["PyTorch", "CNNs", "Object Detection", "Image Segmentation"],
-    "highlights": ["Cloud GPU Access", "Real-world Datasets", "Peer Code Review", "Final Project"],
-    "students": "5.6k",
-    "rating": 4.9,
-    "certificateIncluded": true,
-    "promoText": "Build state-of-the-art vision models for object detection and image segmentation.",
-    "image": "/Assets/images/computer vision misionary.png",
+    "duration": "10 Weeks (140 hrs)",
+    "fee": "₹4,499 / $59",
+    "eligibility": "High school mathematics and basic Python scripting knowledge.",
+    "skills": [
+      "PyTorch",
+      "Neural Networks",
+      "Transformer Architectures",
+      "Computer Vision",
+      "Model Optimization",
+      "AWS SageMaker"
+    ],
+    "tools": [
+      "PyTorch",
+      "TensorFlow",
+      "CUDA",
+      "Jupyter Notebooks",
+      "Docker",
+      "MLflow",
+      "Python 3.12"
+    ],
+    "whatYouWillLearn": [
+      "Understand differential calculus, linear algebra, and backpropagation mechanics from first principles.",
+      "Build deep Convolutional Neural Networks (CNNs) and Recurrent architectures in raw PyTorch.",
+      "Implement Multi-Head Self-Attention mechanisms and modern Transformer decoder blocks.",
+      "Optimize generative neural architectures using quantization (LoRA, QLoRA) and pruning.",
+      "Deploy scalable inference microservices using Docker, FastAPI, and AWS GPU cluster instances."
+    ],
     "curriculum": [
-      { "id": 1, "title": "Intro to Computer Vision", "hours": 4, "lessons": 10, "resources": 2 },
-      { "id": 2, "title": "CNNs Architecture", "hours": 8, "lessons": 14, "resources": 4 },
-      { "id": 3, "title": "Object Detection (YOLO)", "hours": 12, "lessons": 20, "resources": 6 },
-      { "id": 4, "title": "Image Segmentation", "hours": 10, "lessons": 16, "resources": 5 },
-      { "id": 5, "title": "Vision Transformers", "hours": 8, "lessons": 12, "resources": 3 }
+      { "id": 1, "title": "Module 1: Mathematical Foundations of Deep Learning", "hours": 2, "lessons": 1 },
+      { "id": 2, "title": "Module 2: PyTorch Tensors & Automatic Differentiation", "hours": 2, "lessons": 1 },
+      { "id": 3, "title": "Module 3: Building Neural Networks from Scratch", "hours": 2, "lessons": 1 },
+      { "id": 4, "title": "Module 4: Convolutional Neural Networks (CNNs)", "hours": 2, "lessons": 1 },
+      { "id": 5, "title": "Module 5: Sequence Models & Attention Mechanisms", "hours": 2, "lessons": 1 },
+      { "id": 6, "title": "Module 6: Transformer Architectures & LLM Backbones", "hours": 2, "lessons": 1 }
     ],
     "projects": [
-      { "name": "Real-time Defect Detection", "difficulty": "Advanced", "skills": ["PyTorch", "YOLOv8", "OpenCV"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" }
+      {
+        "name": "Custom Transformer Attention Engine in PyTorch",
+        "image": "/Assets/images/ai masterclase.png",
+        "difficulty": "Advanced",
+        "skills": ["PyTorch", "Transformers", "CUDA", "Attention Mechanics"]
+      }
     ],
-    "tools": ["PyTorch", "OpenCV", "TensorBoard", "Roboflow"],
-    "instructor": {
-      "name": "Dr. Marcus Vance",
-      "designation": "CV Researcher",
-      "experience": "9+ Years",
-      "students": "12K+",
-      "courses": 3,
-      "rating": 4.9,
-      "bio": "Specializes in medical imaging and edge AI deployments.",
-      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c7",
-    "title": "Prompt Engineering Pro",
-    "description": "Learn advanced techniques like Chain of Thought, ReAct, and Few-Shot prompting to maximize the capabilities of AI models.",
-    "level": "Beginner",
-    "mode": "Online",
-    "status": "Open",
-    "duration": "2 Weeks",
-    "fee": "Free",
-    "eligibility": "Anyone",
-    "skills": ["Prompt Design", "Chain of Thought", "LLM Behavior", "Content Generation"],
-    "highlights": ["Bite-sized Lessons", "Interactive Playground", "Cheat Sheets", "Quick Certification"],
-    "students": "22.1k",
-    "rating": 4.7,
-    "certificateIncluded": true,
-    "promoText": "Master advanced prompting techniques to maximize the capabilities of AI models.",
-    "image": "/Assets/images/prompt engineering.png",
-    "curriculum": [
-      { "id": 1, "title": "The Anatomy of a Prompt", "hours": 2, "lessons": 5, "resources": 3 },
-      { "id": 2, "title": "Zero-Shot vs Few-Shot", "hours": 3, "lessons": 6, "resources": 2 },
-      { "id": 3, "title": "Advanced Prompting (CoT)", "hours": 4, "lessons": 8, "resources": 4 }
+    "highlights": [
+      "10 Intensive Modules",
+      "PyTorch Google Colab Cloud Workspaces",
+      "Real-World Transformer Training Labs",
+      "Industry Recognized Diploma"
     ],
-    "projects": [
-      { "name": "Custom System Prompts", "difficulty": "Beginner", "skills": ["Prompting", "Testing"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["ChatGPT", "Claude", "OpenAI Playground"],
-    "instructor": {
-      "name": "Sarah Jenkins",
-      "designation": "AI Content Lead",
-      "experience": "4+ Years",
-      "students": "30K+",
-      "courses": 2,
-      "rating": 4.7,
-      "bio": "Mastering the art of communicating with machines.",
-      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c8",
-    "title": "AI in Healthcare",
-    "description": "Explore how artificial intelligence is revolutionizing diagnostics, drug discovery, and patient care management.",
-    "level": "Intermediate",
-    "mode": "Hybrid",
-    "status": "Closed",
-    "duration": "6 Weeks",
-    "fee": "₹4,999",
-    "eligibility": "Healthcare Pros",
-    "skills": ["Medical AI", "Data Privacy (HIPAA)", "Predictive Analytics", "Ethics"],
-    "highlights": ["Expert Guest Speakers", "Clinical Case Studies", "Compliance Guide", "Certification"],
-    "students": "2.8k",
-    "rating": 4.9,
-    "certificateIncluded": true,
-    "promoText": "Explore how artificial intelligence is revolutionizing diagnostics and patient care.",
-    "image": "/Assets/images/ai in healthcare copy.png",
-    "curriculum": [
-      { "id": 1, "title": "AI Basics for Medicine", "hours": 4, "lessons": 8, "resources": 2 },
-      { "id": 2, "title": "Predictive Analytics in Care", "hours": 6, "lessons": 10, "resources": 4 },
-      { "id": 3, "title": "Medical Image Analysis", "hours": 8, "lessons": 12, "resources": 5 },
-      { "id": 4, "title": "Ethics & HIPAA", "hours": 4, "lessons": 6, "resources": 3 }
-    ],
-    "projects": [
-      { "name": "Patient Risk Predictor", "difficulty": "Intermediate", "skills": ["Analytics", "Privacy"], "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["Python", "Scikit-Learn", "AWS HealthLake"],
-    "instructor": {
-      "name": "Dr. Amina Patel",
-      "designation": "Chief Medical Informatics Officer",
-      "experience": "14+ Years",
-      "students": "5K+",
-      "courses": 1,
-      "rating": 4.9,
-      "bio": "Bridging the gap between clinical practice and deep learning.",
-      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
-    }
-  },
-  {
-    "id": "c9",
-    "title": "Natural Language Processing",
-    "description": "From TF-IDF to Transformers, learn the complete evolution of NLP and build your own text analysis pipelines.",
-    "level": "Advanced",
-    "mode": "Offline",
-    "status": "Limited Seats",
-    "duration": "8 Weeks",
-    "fee": "₹5,499",
-    "eligibility": "Developers",
-    "skills": ["Transformers", "Hugging Face", "Sentiment Analysis", "Text Generation"],
-    "highlights": ["In-Person Labs", "Hackathon Event", "1-on-1 Mentorship", "Career Fair Access"],
-    "students": "4.3k",
+    "students": "3,120",
     "rating": 4.8,
-    "certificateIncluded": true,
-    "promoText": "Learn the complete evolution of NLP and build your own text analysis pipelines.",
-    "image": "/Assets/images/NLP.jpeg",
-    "curriculum": [
-      { "id": 1, "title": "Text Preprocessing & Regex", "hours": 4, "lessons": 10, "resources": 2 },
-      { "id": 2, "title": "Word Embeddings", "hours": 6, "lessons": 12, "resources": 3 },
-      { "id": 3, "title": "Sequence Models (RNNs)", "hours": 8, "lessons": 14, "resources": 4 },
-      { "id": 4, "title": "Transformers & HuggingFace", "hours": 12, "lessons": 18, "resources": 6 }
-    ],
-    "projects": [
-      { "name": "Custom Sentiment Analyzer", "difficulty": "Advanced", "skills": ["HuggingFace", "PyTorch"], "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600" }
-    ],
-    "tools": ["Python", "HuggingFace", "NLTK", "PyTorch"],
+    "image": "/Assets/images/ai masterclase.png",
     "instructor": {
-      "name": "Dr. Sarah Chen",
-      "designation": "Principal AI Engineer",
-      "experience": "12+ Years",
-      "students": "45K+",
-      "courses": 8,
-      "rating": 4.9,
-      "bio": "Former Lead AI Researcher at Tech Giants. Passionate about democratizing AI education.",
-      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
+      "name": "Nitish Singh",
+      "designation": "Lead AI Architect & Senior Faculty",
+      "bio": "Senior AI Engineer and expert educator specializing in LLM applications, RAG architectures, and Autonomous AI Systems.",
+      "image": "/Assets/images/tutor/pexels-bymuratisikofficial-34762358.jpg"
     }
   },
   {
-    "id": "c10",
-    "title": "No-Code AI App Building",
-    "description": "Launch your own AI-powered web applications in minutes using modern no-code platforms and AI APIs.",
-    "level": "Beginner",
-    "mode": "Online",
+    "id": "c2",
+    "title": "Applied Autonomous Agentic AI",
+    "description": "Design multi-agent frameworks using LangGraph, AutoGen, CrewAI, and Tool Calling to automate complex software engineering and research workflows.",
+    "level": "Advanced",
+    "mode": "Online Interactive",
     "status": "Open",
-    "duration": "3 Weeks",
-    "fee": "₹2,999",
-    "eligibility": "Entrepreneurs",
-    "skills": ["Bubble", "API Integration", "Rapid Prototyping", "UX Design"],
-    "highlights": ["Build 3 Apps", "Monetization Guide", "Template Library", "Community Support"],
-    "students": "15.7k",
-    "rating": 4.6,
-    "certificateIncluded": false,
-    "promoText": "Launch your own AI-powered web applications in minutes using modern no-code platforms.",
-    "image": "/Assets/images/no code ai app building.png",
+    "duration": "6 Weeks (90 hrs)",
+    "fee": "₹5,999 / $79",
+    "eligibility": "Prior working familiarity with LLMs, APIs, and modern asynchronous Python.",
+    "skills": [
+      "LangGraph",
+      "CrewAI",
+      "AutoGen",
+      "Tool Calling & Function Calling",
+      "Multi-Agent Orchestration",
+      "State Machine Memory"
+    ],
+    "tools": [
+      "LangGraph",
+      "CrewAI",
+      "Microsoft AutoGen",
+      "OpenAI Assistants API",
+      "PostgreSQL Memory",
+      "Python 3.12"
+    ],
+    "whatYouWillLearn": [
+      "Architect cyclical agent workflows and state machines using LangGraph.",
+      "Coordinate multi-agent role-playing teams using CrewAI for research and synthesis.",
+      "Implement recursive task decomposition and dynamic self-reflection verification loops.",
+      "Connect LLM agents to live shell commands, git repositories, and relational databases."
+    ],
     "curriculum": [
-      { "id": 1, "title": "No-Code Ecosystem", "hours": 2, "lessons": 5, "resources": 2 },
-      { "id": 2, "title": "API Basics for Non-Coders", "hours": 4, "lessons": 8, "resources": 3 },
-      { "id": 3, "title": "Building the UI in Bubble", "hours": 6, "lessons": 12, "resources": 5 },
-      { "id": 4, "title": "Connecting OpenAI API", "hours": 4, "lessons": 8, "resources": 3 }
+      { "id": 1, "title": "Module 1: Evolution from RAG to Autonomous Agentic AI", "hours": 2, "lessons": 1 },
+      { "id": 2, "title": "Module 2: Tool Calling & Function Calling Under the Hood", "hours": 2, "lessons": 1 },
+      { "id": 3, "title": "Module 3: LangGraph Cyclical Flows & State Management", "hours": 2, "lessons": 1 },
+      { "id": 4, "title": "Module 4: CrewAI Multi-Agent Teams & Role Delegation", "hours": 2, "lessons": 1 }
     ],
     "projects": [
-      { "name": "AI Cover Letter Generator", "difficulty": "Beginner", "skills": ["Bubble", "OpenAI API"], "image": "https://images.unsplash.com/photo-1432888117426-1d70a316c039?auto=format&fit=crop&q=80&w=600" }
+      {
+        "name": "Autonomous Code Reviewer & Bug Fixing Agent Squad",
+        "image": "/Assets/images/ai agents.png",
+        "difficulty": "Advanced",
+        "skills": ["LangGraph", "Multi-Agent Systems", "Tool Calling"]
+      }
     ],
-    "tools": ["Bubble", "Make", "OpenAI API", "Figma"],
+    "highlights": [
+      "Advanced Masterclass Track",
+      "Live Code & LangGraph Visualizers",
+      "Enterprise Multi-Agent Orchestration",
+      "Proctored Certification"
+    ],
+    "students": "1,950",
+    "rating": 5.0,
+    "image": "/Assets/images/ai agents.png",
     "instructor": {
-      "name": "Tom Hayes",
-      "designation": "Indie Maker",
-      "experience": "6+ Years",
-      "students": "25K+",
-      "courses": 3,
-      "rating": 4.6,
-      "bio": "Teaching non-technical founders how to build scalable products.",
-      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
-      "linkedin": "https://linkedin.com"
+      "name": "Nitish Singh",
+      "designation": "Lead AI Architect & Senior Faculty",
+      "bio": "Senior AI Engineer and expert educator specializing in LLM applications, RAG architectures, and Autonomous AI Systems.",
+      "image": "/Assets/images/tutor/pexels-bymuratisikofficial-34762358.jpg"
     }
   }
 ]

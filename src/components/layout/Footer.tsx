@@ -3,6 +3,7 @@ import { BrainCircuit, Check, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
 const footerLinks = {
@@ -99,11 +100,7 @@ export function Footer() {
           {/* Brand Column (Full width on tablet, 1 col on desktop) */}
           <div className="col-span-2 lg:col-span-1 flex flex-col gap-6">
             <Link href="/" className="flex items-center group w-fit">
-              <img 
-                src="/Assets/logoo.png" 
-                alt="AI Abhyas Logo" 
-                className="h-10 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform"
-              />
+              <Logo className="h-8 md:h-9" />
             </Link>
             <p className="text-muted-foreground text-sm">
               Empowering learners and organizations with practical AI training for a smarter future.
@@ -156,11 +153,7 @@ export function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-6">
             <Link href="/" className="flex items-center group w-fit">
-              <img 
-                src="/Assets/logoo.png" 
-                alt="AI Abhyas Logo" 
-                className="h-10 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform"
-              />
+              <Logo className="h-8 md:h-9" />
             </Link>
             <p className="text-muted-foreground text-sm">
               Empowering learners and organizations with practical AI training for a smarter future.

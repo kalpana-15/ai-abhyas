@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Clock, Laptop, UserCheck, CreditCard, Users, Star, Award, Check, ArrowRight } from "lucide-react";
+import { Clock, Laptop, UserCheck, CreditCard, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Course } from "@/types/course"; // Let's define the interface here if it doesn't exist, or inline it.
+import React from "react";
 
 export interface CourseData {
   id: string;
@@ -20,106 +20,91 @@ export interface CourseData {
   highlights: string[];
   students: string;
   rating: number;
-  certificateIncluded: boolean;
+  certificateIncluded?: boolean;
   image: string;
+  [key: string]: any;
 }
 
 export function CourseCard({ course }: { course: CourseData }) {
-  // Uniform colors per tag type
-  const levelColor = "bg-primary text-white shadow-sm"; // Purple for Level
-  const modeColor = "bg-zinc-900/90 text-[#14B8A6] shadow-sm backdrop-blur-md"; // Dark for Mode
+  const levelColor = "bg-[#8B5CF6] text-white shadow-xs";
+  const modeColor = "bg-zinc-900/80 text-[#14B8A6] shadow-xs backdrop-blur-md";
 
   return (
-    <div className="group relative flex flex-col bg-card rounded-[36px] border-2 border-primary/20 overflow-hidden transition-all duration-300 hover:-translate-y-[6px] hover:border-primary/50 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.12)] dark:hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.25)] h-full">
+    <div className="group relative flex flex-col bg-white dark:bg-[#14182F] rounded-[32px] border border-[#E7E5F4] dark:border-white/[0.1] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[#8B5CF6]/50 hover:shadow-xl hover:shadow-[#8B5CF6]/10 h-full">
       
-      {/* 1. Cover Image Block */}
-      <div className="relative w-full h-[200px] md:h-[220px] shrink-0 overflow-hidden rounded-t-[36px] bg-muted/30">
+      {/* Cover Image Block */}
+      <div className="relative w-full h-[200px] md:h-[220px] shrink-0 overflow-hidden bg-zinc-100 dark:bg-zinc-800">
         <Image 
           src={course.image}
           alt={course.title}
           fill
-          className="object-cover object-[center_60%] transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+          className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
         
-        {/* Badges overlaid on image */}
         <div className="absolute top-3 left-3 z-10">
-          <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full whitespace-nowrap ${levelColor}`}>
+          <span className={`px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide rounded-full ${levelColor}`}>
             {course.level}
           </span>
         </div>
         <div className="absolute top-3 right-3 z-10">
-          <span className={`px-2 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full border border-[#14B8A6]/20 whitespace-nowrap ${modeColor}`}>
+          <span className={`px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide rounded-full border border-[#14B8A6]/20 ${modeColor}`}>
             {course.mode}
           </span>
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex flex-col flex-1 p-4 gap-3">
+      <div className="flex flex-col flex-1 p-5 gap-4">
         
-        {/* Title & Description with Fixed Heights for Uniformity */}
+        {/* Title & Description */}
         <div className="flex flex-col gap-1.5">
-          <h3 className="text-sm md:text-base font-heading font-bold text-foreground truncate group-hover:text-primary transition-colors">
+          <h3 className="text-base sm:text-lg font-bold text-[#111827] dark:text-white line-clamp-1 group-hover:text-[#8B5CF6] transition-colors font-heading">
             {course.title}
           </h3>
-          {/* 
-          <p className="text-[12px] md:text-[13px] text-muted-foreground line-clamp-2 leading-snug h-[34px]">
+          <p className="text-xs sm:text-sm text-[#6B7280] dark:text-[#9CA3AF] line-clamp-2 leading-relaxed">
             {course.description}
           </p>
-          */}
         </div>
 
-        {/* Skills Chips - Fixed height to prevent uneven wrapping */}
-        <div className="flex flex-wrap gap-1.5 h-[24px] overflow-hidden">
+        {/* Skills Chips */}
+        <div className="flex flex-wrap gap-1.5">
           {course.skills.slice(0, 3).map((skill, idx) => (
-            <span key={idx} className="px-2 py-0.5 text-[9px] font-medium bg-muted text-foreground rounded-full whitespace-nowrap">
+            <span key={idx} className="px-2 py-0.5 text-[10px] sm:text-[11px] font-medium bg-[#FAFAF7] dark:bg-white/[0.05] text-[#374151] dark:text-zinc-300 rounded-md border border-[#E7E5F4] dark:border-white/[0.08]">
               {skill}
             </span>
           ))}
         </div>
 
         {/* 2x2 Information Grid */}
-        <div className="grid grid-cols-2 gap-y-3 gap-x-2 pt-3 mt-auto">
-          <div className="flex items-center gap-1.5 text-xs text-foreground">
-            <Clock className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span className="font-medium truncate">{course.duration}</span>
+        <div className="grid grid-cols-2 gap-y-2.5 gap-x-3 pt-1.5 mt-auto text-xs font-medium text-[#374151] dark:text-zinc-300">
+          <div className="flex items-center gap-2 truncate">
+            <Clock className="w-4 h-4 text-[#8B5CF6] shrink-0" />
+            <span className="truncate">{course.duration}</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-foreground">
-            <Laptop className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span className="font-medium truncate">{course.mode}</span>
+          <div className="flex items-center gap-2 truncate">
+            <Laptop className="w-4 h-4 text-[#8B5CF6] shrink-0" />
+            <span className="truncate">{course.mode}</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-foreground">
-            <UserCheck className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span className="font-medium truncate">{course.eligibility}</span>
+          <div className="flex items-center gap-2 truncate">
+            <UserCheck className="w-4 h-4 text-[#8B5CF6] shrink-0" />
+            <span className="truncate">{course.eligibility}</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-foreground">
-            <CreditCard className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span className="font-medium truncate">{course.fee}</span>
+          <div className="flex items-center gap-2 truncate">
+            <CreditCard className="w-4 h-4 text-[#8B5CF6] shrink-0" />
+            <span className="truncate">{course.fee}</span>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-border/60 my-2" />
-
-        {/* Footer Stats 
-        <div className="flex flex-wrap items-center justify-between text-xs font-medium text-muted-foreground">
-          <div className="flex items-center gap-1.5">
-            <Users className="w-3.5 h-3.5" />
-            {course.students} Enrolled
-          </div>
-          <div className="flex items-center gap-1.5 text-amber-500">
-            <Star className="w-3.5 h-3.5 fill-current" />
-            <span className="text-foreground">{course.rating} <span className="text-muted-foreground text-[10px]">(1.2K)</span></span>
-          </div>
-        </div>
-        */}
+        <div className="w-full h-px bg-[#E7E5F4] dark:bg-white/[0.08] my-0.5" />
 
         {/* Primary CTA */}
-        <Link href={`/courses/${course.id}`} className="w-full mt-1">
-          <Button className="w-full h-10 text-xs font-semibold group/btn">
-            View Details <ArrowRight className="ml-1.5 w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+        <Link href={`/courses/${course.id}`} className="w-full mt-auto">
+          <Button className="w-full h-10 py-2 text-xs sm:text-sm font-bold rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-colors group/btn shadow-sm">
+            <span>View Details</span> 
+            <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
           </Button>
         </Link>
 

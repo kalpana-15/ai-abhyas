@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -8,30 +8,46 @@ import { Mail, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { SiGoogle, SiIntel } from "react-icons/si";
 import { FaAws, FaMicrosoft } from "react-icons/fa6";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Logo } from "@/components/ui/Logo";
 
-export default function LoginPage() {
+function LoginContent() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   
   const { login } = useAuth();
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const storedUser = localStorage.getItem("ai_abhyas_user");
-    if (storedUser) {
-      const parsed = JSON.parse(storedUser);
-      if (parsed.email === email) {
-        login(parsed);
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.error || "Invalid email or password");
+        setLoading(false);
         return;
       }
+
+      login(data.user, redirect || "/dashboard");
+    } catch (err) {
+      setError("An unexpected network error occurred. Please check your connection and try again.");
+      setLoading(false);
     }
-    
-    login({ name: email.split("@")[0], email });
   };
 
   return (
@@ -46,18 +62,10 @@ export default function LoginPage() {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/10 dark:bg-indigo-600/20 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
           {/* Top Section: Logo and Back Button */}
-          <div className="relative z-10 flex items-start justify-between w-full">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/30">
-                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.792 0-5.484-.235-8.07-.683-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                </svg>
-              </div>
-              <div>
-                <span className="block text-lg font-bold font-heading tracking-tight text-gray-900 dark:text-white leading-tight">AI Abhyas</span>
-                <span className="block text-[9px] text-gray-500 dark:text-gray-400 font-medium">Learn AI. Build Tomorrow.</span>
-              </div>
-            </div>
+          <div className="relative z-10 flex items-center justify-between w-full">
+            <Link href="/" className="inline-block">
+              <Logo className="h-7 md:h-8 w-auto" />
+            </Link>
 
             <Link href="/" className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all group bg-gray-100/50 hover:bg-gray-100 dark:bg-white/5 dark:hover:bg-white/10 px-3 py-1.5 rounded-full border border-gray-200/50 dark:border-white/10 backdrop-blur-sm mt-0.5">
               <svg className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -160,8 +168,8 @@ export default function LoginPage() {
             >
               <div className="mb-6 text-center lg:text-left">
                 <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-foreground font-heading">Welcome Back</h1>
-                <p className="text-gray-500 dark:text-muted-foreground text-base">
-                  Please enter your details to sign in.
+                <p className="text-gray-500 dark:text-muted-foreground text-sm">
+                  Enter your verified credentials to access your AI engineering dashboard and masterclass workspace.
                 </p>
               </div>
 
@@ -237,12 +245,19 @@ export default function LoginPage() {
                   </Link>
                 </div>
 
+                {error && (
+                  <div className="p-3.5 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/30 rounded-xl border border-red-200 dark:border-red-900/50 font-medium animate-in fade-in duration-200">
+                    {error}
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98]"
+                  disabled={loading}
+                  className="w-full py-3 px-4 bg-primary hover:bg-primary/90 disabled:opacity-70 text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98]"
                 >
-                  Sign In
-                  <ArrowRight className="w-4 h-4" />
+                  {loading ? "Signing in..." : "Sign In"}
+                  {!loading && <ArrowRight className="w-4 h-4" />}
                 </button>
               </form>
 
@@ -278,7 +293,7 @@ export default function LoginPage() {
 
               <p className="mt-6 text-center text-gray-500 dark:text-muted-foreground">
                 Don't have an account?{" "}
-                <Link href="/register" className="font-semibold text-primary hover:text-primary/80 transition-colors">
+                <Link href={redirect ? `/register?redirect=${encodeURIComponent(redirect)}` : "/register"} className="font-semibold text-primary hover:text-primary/80 transition-colors">
                   Create Account
                 </Link>
               </p>
@@ -289,5 +304,13 @@ export default function LoginPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
