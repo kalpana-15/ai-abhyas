@@ -92,7 +92,7 @@ export function Footer() {
   return (
     <footer className="bg-muted/30 pb-[64px] border border-border border-b-0 rounded-t-[40px] md:rounded-t-[80px] mt-24 relative">
       {/* Background Image that fades in from the bottom */}
-      <div className="absolute inset-0 z-0 bg-[url('/assets/images/footer_white.png')] dark:bg-[url('/assets/images/footer_dark.png')] bg-cover bg-bottom bg-no-repeat opacity-60 dark:opacity-70 [mask-image:linear-gradient(to_bottom,transparent_0%,black_100%)] pointer-events-none rounded-t-[40px] md:rounded-t-[80px] overflow-hidden" />
+      <div className="absolute inset-0 z-0 bg-[url('/Assets/images/footer_white.png')] dark:bg-[url('/Assets/images/footer_dark.png')] bg-cover bg-bottom bg-no-repeat opacity-60 dark:opacity-70 [mask-image:linear-gradient(to_bottom,transparent_0%,black_100%)] pointer-events-none rounded-t-[40px] md:rounded-t-[80px] overflow-hidden" />
       
       <div className="container mx-auto px-4 md:px-6 flex flex-col relative z-10">
         {/* LAYER 3: Main Footer Columns (Desktop/Tablet) */}

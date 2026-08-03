@@ -23,8 +23,8 @@ export function FloatingMascot() {
   if (!mounted || pathname?.startsWith("/dashboard")) return null
 
   const mascotSrc = resolvedTheme === "dark" 
-    ? "/assets/images/robo_black_theme-removebg-preview.png" 
-    : "/assets/images/robo_white_.png"
+    ? "/Assets/images/robo_black_theme-removebg-preview.png" 
+    : "/Assets/images/robo_white_.png"
 
   return (
     <>
