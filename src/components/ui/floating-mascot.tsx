@@ -7,8 +7,6 @@ import { useTheme } from "next-themes"
 import { X, Phone, MessageCircle, Mail, Bot, Sparkles } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { AdvisorBot } from "@/components/ui/AdvisorBot"
-import roboDark from "../../../public/images/robo-dark.png"
-import roboLight from "../../../public/images/robo-light.png"
 
 export function FloatingMascot() {
   const { resolvedTheme } = useTheme()
@@ -24,7 +22,7 @@ export function FloatingMascot() {
 
   if (!mounted || pathname?.startsWith("/dashboard")) return null
 
-  const mascotSrc = resolvedTheme === "dark" ? roboDark : roboLight
+  const mascotSrc = resolvedTheme === "dark" ? "/images/robo-dark.png" : "/images/robo-light.png"
 
   return (
     <>
